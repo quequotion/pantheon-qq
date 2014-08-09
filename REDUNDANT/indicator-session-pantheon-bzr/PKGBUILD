@@ -1,0 +1,88 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Xiao-Long Chen <chenxiaolong@cxl.epac.to>
+# Original Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: thn81 <root@scrat>
+
+pkgname=indicator-session-pantheon-bzr
+pkgver=r3
+pkgrel=1
+epoch=1
+pkgdesc="Indicator showing session management, status and user switching"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/indicator-session"
+license=('GPL')
+depends=('hicolor-icon-theme' 'dconf')
+makedepends=('cmake' 'intltool' 'python2')
+optdepends=('lightdm: support for lightdm')
+provides=('indicator-session' 'indicator-session-pantheon' 'indicator-session-pantheon-bzr')
+conflicts=('indicator-session' 'indicator-session-systemd')
+groups=('pantheon')
+install=${pkgname}.install
+source=("bzr+lp:~elementary-os/elementaryos/os-patch-indicator-session-trusty"
+        'indicator-session.service'
+	'fix-schema-path.patch'
+	'fix-convert-path.patch'
+	'nowecannot.patch')
+sha512sums=('SKIP'
+            '540c76c0f68b028194bb1000dd61a0c24f2f16427e79d237b94b8c65fe5e3e16eb6ea645f0fd33d734113727e25b6eb7452cb72f72399c9e8d370f74abba7511'
+            '84fc2a5112b216389ed6dbce8e14ed112e1f215923e6d3fb87515f3db2b2544925b64ccb54c06b15854395b06ed13897cc4a871b262289f817695e36a2125f23'
+            'e94723701ad50c4d96747f214d978709ab2abc34910f3b99338a54571d5e69dc469df4acff59a0d60ae0a18a2efb68d133764c40cc5e7a69090887840454f5c3'
+            'ed7275bb66edb65ac4d9b29b664989f1f942f0486114820a1899cba7ef46f1e12569bdf7e95ae7601076835641709178d5b083f2d34deacc548556c590b6ba90')
+
+pkgver() {
+  cd os-patch-indicator-session-trusty
+
+  printf "r%s" "$(bzr revno)"
+}
+
+prepare() {
+  cd "${srcdir}/os-patch-indicator-session-trusty"
+
+  patch -Np2 < "${srcdir}/fix-schema-path.patch"
+  patch -Np2 < "${srcdir}/fix-convert-path.patch"
+  patch -Np2 < "${srcdir}/nowecannot.patch"
+
+  sed -i 's/unity-control-center/gnome-control-center/g' \
+    src/backend-dbus/actions.c
+}
+
+build() {
+  cd "${srcdir}/os-patch-indicator-session-trusty"
+
+  mkdir build && cd build
+  cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -Denable_tests=OFF \
+    -Denable_lcov=OFF
+
+  make
+}
+
+package() {
+  cd "${srcdir}/os-patch-indicator-session-trusty/build"
+
+  make DESTDIR="${pkgdir}/" install
+
+  rm -vf "${pkgdir}/test-service"
+
+  # Please fix CMake scripts, Ubuntu...
+  rm -rv "${pkgdir}/usr/share/locale/LC_MESSAGES/"
+
+  for i in ../po/*.po; do
+    FILELANG=$(basename ${i})
+    FILELANG=${FILELANG%.po}
+    install -dm755 "${pkgdir}/usr/share/locale/${FILELANG}/LC_MESSAGES/"
+    msgfmt -v ${i} -o \
+      "${pkgdir}/usr/share/locale/${FILELANG}/LC_MESSAGES/indicator-session.mo"
+  done
+
+  install -dm755 "${pkgdir}/usr/share/dbus-1/services/"
+  install -m644 "${srcdir}/indicator-session.service" \
+                "${pkgdir}/usr/share/dbus-1/services/"
+
+  rm -r "${pkgdir}/usr/share/upstart/"
+
+  # Use language packs
+  rm -r "${pkgdir}/usr/share/locale/"
+}

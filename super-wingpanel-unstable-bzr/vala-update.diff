@@ -1,0 +1,13 @@
+--- src/unstable/src/PanelController.vala~	2014-07-24 14:33:49.281042406 +0900
++++ src/unstable/src/PanelController.vala	2014-07-24 14:40:46.004085151 +0900
+@@ -302,8 +302,8 @@
+                 for (var i = 0; i < first_struts.length; i++)
+                     first_struts[i] = struts[i];
+ 
+-                unowned X.Display display = Gdk.X11Display.get_xdisplay (primary_window.window.get_display ());
+-                var xid = Gdk.X11Window.get_xid (primary_window.window.get_window ());
++                unowned X.Display display = Gdk.X11Display.get_xdisplay (get_display ());
++                var xid = Gdk.X11Window.get_xid (get_window ());
+ 
+                 display.change_property (xid, display.intern_atom ("_NET_WM_STRUT_PARTIAL", false), X.XA_CARDINAL,
+                                          32, X.PropMode.Replace, (uchar[]) struts, struts.length);

@@ -1,0 +1,41 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Xiao-Long Chen <chenxiaolong@cxl.epac.to>
+# Original Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: thn81 <root@scrat>
+
+pkgname=ido-bzr
+pkgver=r184
+pkgrel=1
+epoch=1
+pkgdesc="Widgets and other objects used for indicators"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/ido"
+license=('LGPL')
+depends=('gtk3-ubuntu' 'glib2')
+makedepends=('gobject-introspection' 'gtk-doc' 'vala' 'xorg-util-macros')
+groups=('unity')
+provides=('ido' 'ido3')
+conflicts=('ido' 'ido3')
+source=("bzr+lp:ido")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd ido
+
+  printf "r%s" "$(bzr revno)"
+}
+
+build() {
+  cd "${srcdir}/ido"
+
+  export CFLAGS="${CFLAGS} -Wno-error"
+  autoreconf -vfi
+  ./configure --prefix=/usr --disable-static # --disable-introspection
+  make
+}
+
+package() {
+  cd "${srcdir}/ido"
+
+  make DESTDIR="${pkgdir}/" install
+}

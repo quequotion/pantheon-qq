@@ -1,0 +1,73 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Xiao-Long Chen <chenxiaolong@cxl.epac.to>
+# Original Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: thn81 <root@scrat>
+
+pkgname=bamf-bzr
+pkgver=r601
+pkgrel=1
+epoch=1
+pkgdesc="Removes the headache of applications matching into a simple DBus daemon and c wrapper library"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/bamf"
+license=('GPL')
+depends=('libgtop' 'libwnck3' 'glib2' 'procps-ng')
+makedepends=('gnome-common' 'gobject-introspection' 'gtk-doc' 'libxml2' 'libxslt' 'vala')
+provides=('FEATURE-bamf-webapps' "libbamf3=${pkgver}" "bamfdaemon=${pkgver}" "bamf")
+replaces=('libbamf3' 'bamfdaemon' 'bamf')
+groups=('unity')
+install=${pkgname}.install
+source=("bzr+lp:bamf"
+        'bamfwatcher.c'
+        'update-bamf-index.pl'
+        'bamfwatcher.service')
+sha512sums=('SKIP'
+            '8682d60845782449943ebac95dc5648ec5933f244dad8bbb9e77ac1c692fc03ef0c12b6cd15c2b5f5af30358d2b167362a288adb4b3ee7ea047065eec64f28bf'
+            '7db84774b72fb330abe2116f3d1d842c007820c200344d76ff87abab5226488fcc21d2e82cbe5381fb3e7ce0eacc09232f17d64c4e2a5ee8eef0be06808f21ff'
+            'b2e899e2916efc6e04af34c3bffc14f6254caaf42d2e3cee88277dde4c191dd93cab14246091beb5d4cfb8a242559b8361a7c4c1dc70c31034ade52689322b83')
+
+pkgver() {
+  cd bamf
+
+  printf "r%s" "$(bzr revno)"
+}
+
+prepare() {
+  cd "${srcdir}/bamf"
+
+  sed -i 's/-Werror/-Wno-error/g' configure.ac
+}
+
+build() {
+  cd "${srcdir}"
+
+  gcc bamfwatcher.c -lprocps -o bamfwatcher
+
+  cd "bamf"
+
+  gtkdocize
+  autoreconf -vfi
+
+  export PYTHON=/usr/bin/python2
+  
+  if ! pacman -Q xorg-server-xvfb &>/dev/null; then
+    ./configure --prefix=/usr --libexecdir=/usr/lib --disable-static --enable-gtk-doc
+  else
+    ./configure --prefix=/usr --libexecdir=/usr/lib --disable-static --enable-gtk-doc --enable-headless-tests
+  fi
+  make
+}
+
+package() {
+  cd "${srcdir}/bamf"
+
+  make DESTDIR="${pkgdir}/" install
+
+  install -dm755 "${pkgdir}/usr/bin/"
+  install -m755 "${srcdir}/bamfwatcher" "${pkgdir}/usr/bin/"
+  install -m755 "${srcdir}/update-bamf-index.pl" "${pkgdir}/usr/lib/bamf/"
+
+  # Install systemd service
+  install -dm755 "${pkgdir}/usr/lib/systemd/system/"
+  install -m644 "${srcdir}/bamfwatcher.service" "${pkgdir}/usr/lib/systemd/system/"
+}

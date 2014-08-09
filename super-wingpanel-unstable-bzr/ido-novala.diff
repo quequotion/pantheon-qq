@@ -1,0 +1,16 @@
+--- src/unstable/CMakeLists.txt~	2014-07-24 14:29:08.679013624 +0900
++++ src/unstable/CMakeLists.txt	2014-07-24 14:31:02.555025304 +0900
+@@ -43,12 +43,12 @@
+     gtk+-3.0
+     granite
+     indicator3-0.4
+-    libido3-0.1
+     libwnck-3.0
+ )
+ 
+ set (WINGPANEL_DEPS_NOVALA 
+     gthread-2.0
++    libido3-0.1
+ )
+ 
+ 

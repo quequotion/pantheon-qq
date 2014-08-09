@@ -1,0 +1,52 @@
+# Maintainer: quequotion <quequotion@bugmenot.com>
+# Contributor: ernest21 <ernest2193 at gmail dot com>
+
+pkgname=super-wingpanel-bzr
+pkgver=189
+pkgrel=1
+epoch=1
+pkgdesc='A super sexy space-saving top panel (unstable bzr version)'
+arch=('i686' 'x86_64')
+url="https://code.launchpad.net/~heathbar/wingpanel/super-wingpanel"
+license=('GPL3')
+depends=('granite-bzr' 'libindicator-gtk3' 'libwnck3' 'libgee06' )
+optdepends=('indicator-datetime: Display date and time'
+            'indicator-pantheon-session-bzr: Pantheon session indicator'
+            'indicator-power: Battery idicator')
+makedepends=('bzr' 'cmake' 'vala')
+provides=("${pkgname%-*}")
+conflicts=("${pkgname%-*}")
+install="${pkgname%-*}.install"
+source=("bzr+lp:/~heathbar/super-wingpanel/unstable"
+	'libgee-0.8.diff'
+	'super-unity-indicators.diff')
+sha256sums=('SKIP'
+            '038cef670fb57be8180d5b5bbb6280b0a50a1a15b0086d7f53fcb548e88e0ad7'
+            '1ea904e091c7673d9170aeace07b2974bcb4495d7f12114db543a8b4467789ba')
+
+pkgver() {
+  cd unstable
+
+  printf "r%s" "$(bzr revno)"
+}
+
+build() {
+  cd unstable
+
+  patch -Np2 -i "${srcdir}/libgee-0.8.diff"
+  patch -Np2 -i "${srcdir}/super-unity-indicators.diff"
+
+  if [[ -d build ]]; then
+    rm -rf build
+  fi
+  mkdir build && cd build
+
+  cmake .. -DCMAKE_BUILD_TYPE='Release' -DCMAKE_INSTALL_PREFIX='/usr' -DGSETTINGS_COMPILE='OFF'
+  make 
+}
+
+package() {
+  cd unstable/build
+
+  make DESTDIR="${pkgdir}" install
+}
