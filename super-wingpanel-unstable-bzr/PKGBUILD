@@ -2,7 +2,7 @@
 # Contributor: ernest21 <ernest2193 at gmail dot com>
 
 pkgname=super-wingpanel-bzr
-pkgver=189
+pkgver=r189
 pkgrel=1
 epoch=1
 pkgdesc='A super sexy space-saving top panel (unstable bzr version)'
@@ -22,7 +22,7 @@ source=("bzr+lp:/~heathbar/super-wingpanel/unstable"
 	'super-unity-indicators.diff')
 sha256sums=('SKIP'
             '038cef670fb57be8180d5b5bbb6280b0a50a1a15b0086d7f53fcb548e88e0ad7'
-            '1ea904e091c7673d9170aeace07b2974bcb4495d7f12114db543a8b4467789ba')
+            '7fe49833c8d952169cb074e7f59220304a35defd64c332bd1f82e4fc8affa813')
 
 pkgver() {
   cd unstable

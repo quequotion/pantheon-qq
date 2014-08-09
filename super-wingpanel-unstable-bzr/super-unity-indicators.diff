@@ -221,3 +221,14 @@ diff -ruN src.bak/unstable/src/Widgets/PrimaryWindow.vala src/unstable/src/Widge
                  if (manager.settings.show_datetime_in_tray)
                      indicator_menubar.insert_sorted (entry);
                  else
+--- src/unstable/org.pantheon.desktop.super-wingpanel.gschema.xml~	2014-07-24 15:09:20.944461000 +0900
++++ src/unstable/org.pantheon.desktop.super-wingpanel.gschema.xml	2014-08-10 07:02:06.452459591 +0900
+@@ -76,7 +76,7 @@
+             <description>Override the default "Applications" text.</description>
+         </key>
+         <key type="as" name="indicator-order">
+-            <default>[ 'libdatetime.so','libapplication.so', 'libapplication.so|keyboard', 'libapplication.so|gsd-keyboard-xkb', 'libsoundmenu.so', 'libnetwork.so', 'libnetworkmenu.so', 'libapplication.so|nm-applet', 'libbluetooth.so', 'libapplication.so|bluetooth-manager', 'libprintersmenu.so', 'libsyncindicator.so', 'libpower.so', 'libmessaging.so', 'libsession.so', 'libsession.so|indicator-session-users', 'libsession.so|indicator-session-devices' ]</default>
++            <default>[ 'libappmenu.so', 'libdatetime.so', 'com.canonical.indicator.datetime', 'libapplication.so', 'libapplication.so|keyboard', 'libapplication.so|gsd-keyboard-xkb', 'com.canonical.indicator.keyboard', 'libsoundmenu.so', 'com.canonical.indicator.sound', 'libnetwork.so', 'libnetworkmenu.so', 'libapplication.so|nm-applet', 'libbluetooth.so', 'libapplication.so|bluetooth-manager', 'com.canonical.indicator.bluetooth', 'libprintersmenu.so', 'libsyncindicator.so', 'libpower.so', 'com.canonical.indicator.power', 'libmessaging.so', 'com.canonical.indicator.messages', 'libsession.so', 'com.canonical.indicator.session', 'libsession.so|indicator-session-users', 'libsession.so|indicator-session-devices' ]</default>
+             <summary>The order in which to display indicators, from left to right</summary>
+             <description>The order in which to display indicators, from left to right</description>
+         </key>
