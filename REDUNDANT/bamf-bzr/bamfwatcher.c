@@ -76,7 +76,7 @@ void wait_for_pacman() {
 
 void rebuild() {
   wait_for_pacman();
-  printf("Rebuilding bamf.index...");
+  printf("Rebuilding bamf-2.index...");
   fflush(stdout);
   system("/usr/lib/bamf/update-bamf-index.pl /usr/share/applications/ > /var/cache/bamf/bamf-2.index");
   printf(" Done\n");
@@ -127,7 +127,7 @@ int main(int argc, char *argv[]) {
     while (i < length) {
       struct inotify_event *event = (struct inotify_event *)&buf[i];
       /* Make sure we don't get into an infinite loop */
-      if (strcmp(event->name, "bamf.index") != 0) {
+      if (strcmp(event->name, "bamf-2.index") != 0) {
         print_event(event);
         needs_updating = 1;
       }
