@@ -33,7 +33,7 @@ build() {
   cd "${srcdir}/os-patch-indicator-application-trusty"
 
   autoreconf -vfi
-  ./configure --prefix=/usr --libexecdir=/usr/lib/${pkgname} --disable-static
+  ./configure --prefix=/usr --libexecdir=/usr/lib/indicator-application-pantheon --disable-static
   make
 }
 
