@@ -1,5 +1,5 @@
 [Unit]
-Description=Update Bamf index for Unity shell
+Description=Update Bamf index for libunity docks
 
 [Service]
 Type=simple
