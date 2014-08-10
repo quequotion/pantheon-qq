@@ -20,11 +20,13 @@ install=${pkgname}.install
 source=("bzr+lp:bamf"
         'bamfwatcher.c'
         'update-bamf-index.pl'
-        'bamfwatcher.service')
+        'bamfwatcher.service'
+	'var-cache-index.patch')
 sha512sums=('SKIP'
-            '054ef0f0e9bdd4ccf5dfdab95bde0a17cd2f1249473879453a41919feb8f6d88f1bc71d2ff34f68cae728825cdb2df4663f0bdfa8e3cc4012c474dc81e29492f'
+            '08da22f928a164319d0ab6bd61933d57d195881d6c63b224a277dce74126b0a321de6772aa4e02859abc1baaa3ed424de352de387be4d14edfffce5395b5d425'
             '7db84774b72fb330abe2116f3d1d842c007820c200344d76ff87abab5226488fcc21d2e82cbe5381fb3e7ce0eacc09232f17d64c4e2a5ee8eef0be06808f21ff'
-            '844bb16542cdcb6d9d46fe791bb74f8362516668f9eae62a0a0cd10d86cf6ab2dd7df17af127c8a55e11e68fe0528a5daa94af465ac9e2c4a911542387f8234d')
+            '844bb16542cdcb6d9d46fe791bb74f8362516668f9eae62a0a0cd10d86cf6ab2dd7df17af127c8a55e11e68fe0528a5daa94af465ac9e2c4a911542387f8234d'
+            '28762caac6a4f689341defb30ede718c41794edd0fc134dedc172c3b2744b3a284d654091103e2569adb3cb41b1c160c149ce163ab14503ba76e9489127234ad')
 
 pkgver() {
   cd bamf
@@ -34,6 +36,8 @@ pkgver() {
 
 prepare() {
   cd "${srcdir}/bamf"
+
+  patch -Np2 < ../var-cache-index.patch
 
   sed -i 's/-Werror/-Wno-error/g' configure.ac
 }
