@@ -1,0 +1,31 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+
+pkgname=xscreensaver-dbus-screenlock
+pkgver=1
+pkgrel=1
+pkgdesc="Emulate's gnome-screensaver's dbus for screen locking with gnome DE's"
+arch=('i686' 'x86_64')
+url="http://ubuntuforums.org/showthread.php?t=1865593&s=1c7f28c50a3f258e1d3404e41f098a0b&p=11418175#post11418175"
+license=('GPL')
+depends=('xscreensaver' 'python' 'dbus')
+optdepends=('indicator-session: Lock without gnome-screensaver or Unity')
+provides=('gnome-screensaver')
+conflicts=('gnome-screensaver')
+install=${pkgname}.install
+source=('xscreensaver-dbus-screenlock.py'
+	'xscreensaver-dbus-screenlock.desktop')
+md5sums=('0a1f60e3834481b1b3043d484d4ffcf7'
+         'aeaa9e6597df52fafb320186b1825c03')
+
+package() {
+
+  # Don't install xscreensaver-dbus-screenlock.py script if user has a personalized copy
+  if [ ! -f "/usr/local/sbin/xscreensaver-dbus-screenlock.py" ]; then
+    install -Ddm755 "${pkgdir}/usr/bin/"
+    install -Dm755 "${srcdir}/xscreensaver-dbus-screenlock.py" "${pkgdir}/usr/bin/xscreensaver-dbus-screenlock.py"
+  fi
+
+  install -Ddm755 "${pkgdir}/etc/xdg/autostart/"
+  install -Dm644 "${srcdir}/xscreensaver-dbus-screenlock.desktop" "${pkgdir}/etc/xdg/autostart/"
+
+}
