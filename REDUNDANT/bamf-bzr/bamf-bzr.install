@@ -1,7 +1,7 @@
 post_install() {
   gio-querymodules usr/lib/gio/modules
 
-  # This service must be enabled to avoid issues with Unity
+  # Libunity docks require this service to behave intelligently
   systemctl enable bamfwatcher.service
   systemctl start bamfwatcher.service
 }

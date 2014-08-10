@@ -2,7 +2,7 @@
 /* Modified by: Que Quotion <quequotion@bugmenot.com> */
 
 /* This program will monitor /usr/share/applications/ for changes and rebuild
- * /var/cache/bamf/bamf.index accordingly. It will wait for pacman to
+ * /var/cache/bamf/bamf-2.index accordingly. It will wait for pacman to
  * finish first before updating */
 
 /* Compile with (gcc|clang) bamfwatcher.c -lprocps -o bamfwatcher */
@@ -78,7 +78,7 @@ void rebuild() {
   wait_for_pacman();
   printf("Rebuilding bamf-2.index...");
   fflush(stdout);
-  system("/usr/lib/bamf/update-bamf-index.pl /usr/share/applications/ > /var/cache/bamf-2.index");
+  system("/usr/lib/bamf/update-bamf-index.pl /usr/share/applications/ > /var/cache/bamf/bamf-2.index");
   printf(" Done\n");
 }
 
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  if (access("/var/cache/bamf-2.index", F_OK) != 0) {
+  if (access("/var/cache/bamf/bamf-2.index", F_OK) != 0) {
     rebuild();
   }
 
