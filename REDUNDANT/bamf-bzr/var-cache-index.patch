@@ -1,11 +1,12 @@
---- src/bamf/src/bamf-matcher.c~	2014-08-10 20:34:36.474700000 +0900
-+++ src/bamf/src/bamf-matcher.c	2014-08-10 23:05:43.569588181 +0900
-@@ -1102,6 +1102,8 @@
-   GList *dirs = NULL;
-   char *path;
+--- src/bamf/src/bamf-matcher.c~	2014-08-11 00:47:54.505809427 +0900
++++ src/bamf/src/bamf-matcher.c	2014-08-11 00:47:14.103555000 +0900
+@@ -1128,5 +1135,8 @@
+   /* Include also the user desktop folder, but without its subfolders */
+   dirs = g_list_prepend (dirs, g_strdup (g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP)));
  
++  /* Include also the cache directory */
 +  dirs = g_list_prepend (dirs, g_strdup ("/var/cache/bamf"));
 +
-   dirs = list_prepend_desktop_file_env_directories (dirs, "XDG_DATA_DIRS");
+   return dirs;
+ }
  
-   if (!g_list_find_custom (dirs, "/usr/share/applications", (GCompareFunc) g_strcmp0))
