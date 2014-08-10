@@ -26,7 +26,7 @@ sha512sums=('SKIP'
             '097c872c99b347a3cb21973b506d4fede60a60d41ea3f3ef5960d894caa4e986565e6eef329a2cf2c2564d071e3034cf4316b2d112ec84ad8636a33de48e842f'
             '7db84774b72fb330abe2116f3d1d842c007820c200344d76ff87abab5226488fcc21d2e82cbe5381fb3e7ce0eacc09232f17d64c4e2a5ee8eef0be06808f21ff'
             '844bb16542cdcb6d9d46fe791bb74f8362516668f9eae62a0a0cd10d86cf6ab2dd7df17af127c8a55e11e68fe0528a5daa94af465ac9e2c4a911542387f8234d'
-            'f033306382a7effe23229340a40c28378f8f5e0f5e3c07c05e6c3116aa315d0b98298c511c6d47332a9b9eaf2f456f1340ba45200c0b9f8d9de7d5a475d5014a')
+            '721a23bdb1a9ce9e7e1c5c3683d6743ddf4c838d967ec86057aaf547a9051bbf26ac265d33fd90502d6655fdc31404ca3b577d4691a61ddda39615d9425d1d75')
 
 pkgver() {
   cd bamf
@@ -37,7 +37,7 @@ pkgver() {
 prepare() {
   cd "${srcdir}/bamf"
 
-  #patch -Np2 < ../var-cache-index.patch
+  patch -Np2 < ../var-cache-index.patch
 
   sed -i 's/-Werror/-Wno-error/g' configure.ac
 }
