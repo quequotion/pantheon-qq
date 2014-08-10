@@ -68,7 +68,7 @@ package() {
   make DESTDIR="${pkgdir}/" install
 
   install -dm755 "${pkgdir}/usr/bin/"
-  install -dm755 "${pkgdir}/var/cache/bamf/"
+  install -dm755 "${pkgdir}/var/cache/"
   install -m755 "${srcdir}/bamfwatcher" "${pkgdir}/usr/bin/"
   install -m755 "${srcdir}/update-bamf-index.pl" "${pkgdir}/usr/lib/bamf/"
 
