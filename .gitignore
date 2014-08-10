@@ -22,6 +22,7 @@
 *.xz
 
 # Archlinux Packaging #
+#######################
 *.tar
 *.tar.*
 *.zip
@@ -48,3 +49,6 @@ src/
 ehthumbs.db
 Thumbs.db
 *~
+
+# Particulars #
+###############
