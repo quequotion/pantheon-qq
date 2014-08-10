@@ -22,7 +22,7 @@ package() {
   # Don't install xscreensaver-dbus-screenlock.py script if user has a personalized copy
   if [ ! -f "/usr/local/sbin/xscreensaver-dbus-screenlock.py" ]; then
     install -Ddm755 "${pkgdir}/usr/bin/"
-    install -Dm755 "${srcdir}/xscreensaver-dbus-screenlock.py" "${pkgdir}/usr/bin/xscreensaver-dbus-screenlock.py"
+    install -Dm755 "${srcdir}/xscreensaver-dbus-screenlock.py" "${pkgdir}/usr/bin/"
   fi
 
   install -Ddm755 "${pkgdir}/etc/xdg/autostart/"
