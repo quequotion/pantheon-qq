@@ -4,6 +4,7 @@ post_install() {
   # Libunity docks require this service to behave intelligently
   systemctl enable bamfwatcher.service
   systemctl start bamfwatcher.service
+  chmod 755 var/cache/bamf/bamf-2.index
 }
 
 post_upgrade() {

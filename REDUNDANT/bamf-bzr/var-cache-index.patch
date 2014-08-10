@@ -14,7 +14,7 @@
  
 +  /* Include the cache folder */
 +  cache = g_build_filename ("/var/cache/bamf", NULL);
-+  dirs = g_list_prepend (dirs, cahce);
++  dirs = g_list_prepend (dirs, cache);
 +  g_free (cache);
 +
    return dirs;
