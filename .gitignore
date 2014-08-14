@@ -53,3 +53,5 @@ Thumbs.db
 # Particulars #
 ###############
 switchboard-gnome-control-center-override-bzr/
+EXTRAS/network-manager-applet-git-ubuntu/
+EXTRAS/network-manager-appplet-ubuntu/
