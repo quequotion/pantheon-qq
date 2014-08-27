@@ -1,0 +1,39 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Xiao-Long Chen <chenxiaolong@cxl.epac.to>
+# Original Maintainer: György Balló <ballogy@freestart.hu>
+# Contributor: thn81 <root@scrat>
+
+pkgname=properties-cpp-bzr
+pkgver=r17
+pkgrel=1
+epoch=1
+pkgdesc="Widgets and other objects used for indicators"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/properties-cpp"
+license=('LGPL')
+depends=( )
+makedepends=( 'cmake' 'doxygen' 'gmock' 'graphviz' 'gtest')
+groups=('unity')
+provides=('properties-cpp')
+conflicts=('properties-cpp')
+source=("bzr+lp:properties-cpp")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd properties-cpp
+
+  printf "r%s" "$(bzr revno)"
+}
+
+build() {
+  cd "${srcdir}/properties-cpp"
+
+  mkdir build && cd build
+  cmake ../
+}
+
+package() {
+  cd "${srcdir}/properties-cpp/build"
+
+  make DESTDIR="${pkgdir}/" install
+}
