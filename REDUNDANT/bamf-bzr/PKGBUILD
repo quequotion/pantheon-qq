@@ -4,7 +4,7 @@
 # Contributor: thn81 <root@scrat>
 
 pkgname=bamf-bzr
-pkgver=r601
+pkgver=r604
 pkgrel=1
 epoch=1
 pkgdesc="Removes the headache of applications matching into a simple DBus daemon and c wrapper library"
@@ -71,7 +71,8 @@ package() {
 
   install -dm755 "${pkgdir}/usr/bin/"
   install -dm755 "${pkgdir}/var/cache/bamf"
-  #install -m755  "${srcdir}/bamf-2.index" "${pkgdir}/var/cache/bamf/bamf-2.index"
+  touch "${pkgdir}/var/cache/bamf/bamf-2.index"
+  chmod 755 "${pkgdir}/var/cache/bamf/bamf-2.index"
   install -m755 "${srcdir}/bamfwatcher" "${pkgdir}/usr/bin/"
   install -m755 "${srcdir}/update-bamf-index.pl" "${pkgdir}/usr/lib/bamf/"
 

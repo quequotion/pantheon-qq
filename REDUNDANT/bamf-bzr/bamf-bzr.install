@@ -3,8 +3,7 @@ post_install() {
 
   # Libunity docks require this service to behave intelligently
   systemctl enable bamfwatcher.service
-  systemctl start bamfwatcher.service
-  chmod 755 var/cache/bamf/bamf-2.index
+  #systemctl start bamfwatcher.service
 }
 
 post_upgrade() {
@@ -18,3 +17,4 @@ pre_remove() {
 post_remove() {
   gio-querymodules usr/lib/gio/modules
 }
+
