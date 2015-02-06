@@ -11,7 +11,7 @@ pkgdesc="not so simple clipboard manager for GNOME (bzr version with appindicato
 arch=('i686' 'x86_64')
 url="https://launchpad.net/glippy"
 license=('GPL')
-depends=('mono' 'gnome-sharp')
+depends=('mono' 'gnome-sharp' 'libappindicator-sharp')
 makedepends=('automake' 'bzr')
 provides=('glippy=$pkgver' '$pkgname')
 options=(!emptydirs)
