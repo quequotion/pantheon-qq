@@ -7,7 +7,7 @@ pkgver=1
 pkgrel=1
 pkgdesc='Pantheon Lite Session (pantheon/openbox desktop environment)'
 arch=('i686' 'x86_64')
-url='https://bbs.archlinux.org/viewtopic.php?pid=1401967#p1401967'
+url='https://bbs.archlinux.org/viewtopic.php?pid=1402016#p1402016'
 license=('GPL3')
 depends=('openbox' 'obconf' 'compton' 'pantheon-workarounds' 
          gnome-{settings-daemon{,-compat},session}
@@ -17,10 +17,11 @@ depends=('openbox' 'obconf' 'compton' 'pantheon-workarounds'
   depends+=('wingpanel-bzr')
 optdepends=(indicator-{application,datetime,messages,printers,session,sound}-pantheon-bzr": Tray applet"
             "indicator-power-bzr: Tray applet"
-            "glippy-bzr: Simple, Powerful Clipboard manager"
-            "indicator-powersave: On the fly system power savings and performance toggles"
+            "network-manager-applet-ubuntu: Tray applet"
+            "glippy-bzr: Simple, powerful clipboard manager"
+            "indicator-powersave: On the fly power savings and performance toggles"
             "pantheon-notify-bzr: Popup notifications (freedesktop standard compliant)"
-            "pantheon-print-bzr: Printer dialog (integrates with contractor-enabled applications"
+            "pantheon-print-bzr: Printer dialog (integrates with contractor-enabled applications)"
             "elementary-os-openbox: Elementary theme for Openbox")
 provides=("pantheon-lite")
 conflicts=()
