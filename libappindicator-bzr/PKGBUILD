@@ -5,7 +5,7 @@
 
 pkgbase=libappindicator-bzr
 pkgname=('libappindicator-bzr' 'libappindicator3-bzr')
-pkgver=r270
+pkgver=r273
 pkgrel=1
 epoch=1
 pkgdesc="A library to allow applications to export a menu into the Unity Menu bar"
@@ -28,7 +28,9 @@ pkgver() {
 prepare() {
   cd "${srcdir}/libappindicator"
 
-  patch -p1 -i "${srcdir}/0001_Timeout.patch"
+  patch -Np1 -i "${srcdir}/0001_Timeout.patch"
+  sed -i 's|/\*\*|*|g' src/app-indicator.c
+  sed -i 's|/\*\*|*|g' src/app-indicator.h
 
   # nunit renamed to mono-nunit in /usr/lib/pkgconfig/mono-nunit.pc
   sed -i 's/nunit >= 2\.4\.7/mono-nunit >= 2.4.7/' configure.ac

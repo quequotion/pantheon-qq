@@ -4,7 +4,7 @@
 # Contributor: thn81 <root@scrat>
 
 pkgname=indicator-session-pantheon-bzr
-pkgver=r3
+pkgver=r6
 pkgrel=1
 epoch=1
 pkgdesc="Indicator showing session management, status and user switching"

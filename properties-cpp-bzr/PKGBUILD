@@ -12,17 +12,24 @@ arch=('i686' 'x86_64')
 url="https://launchpad.net/properties-cpp"
 license=('LGPL')
 depends=( )
-makedepends=( 'cmake' 'doxygen' 'gmock' 'graphviz' 'gtest')
+makedepends=( 'cmake' 'doxygen' 'gmock' 'graphviz' 'gtest' 'lcov' 'gcovr')
 groups=('unity')
 provides=('properties-cpp')
 conflicts=('properties-cpp')
-source=("bzr+lp:properties-cpp")
-sha512sums=('SKIP')
+source=("bzr+lp:properties-cpp"
+        'find-on-arch.patch')
+sha512sums=('SKIP'
+            'd94b53a8f5245559796a94cdb4273a5e49ded591b2c760ddd4d9e2d05553d508d62862ba6988e622b37f147640993cd908a1290ca4c927b6defb1bee2261d843')
 
 pkgver() {
   cd properties-cpp
 
   printf "r%s" "$(bzr revno)"
+}
+
+prepare() {
+  #find dependencies based on their arch installation paths
+  patch -Np1 < find-on-arch.patch
 }
 
 build() {

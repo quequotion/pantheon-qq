@@ -23,6 +23,11 @@ sha512sums=('SKIP'
             '8a25bbf83036bd8355142eb49207a98943901f299e7fd3bd7bd90f6bc876d77a52f8685016f3129cdfbc74dbc64d028328ae072fd7868df2b56450307af7621f'
             '31bf2bbb4c03dd7032f3593cc9f244a2dbced64bb32312c7fc72e6342e7063d3396af1e590af0808f6f0e9bfe92ee32cd9a601081e471eff3d925c0ab666a0bd')
 
+pkgver() {
+  cd indicator-power
+  bzr revno
+}
+
 prepare() {
   cd "${srcdir}/indicator-power"
 
