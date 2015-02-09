@@ -1,0 +1,70 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.org>
+# Contributor: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Ner0 <darkelfdarkelf666@yahoo.co.uk>
+
+pkgname=pantheon-workarounds
+pkgver=2
+pkgrel=1
+pkgdesc='Workarounds for modular and minimal Pantheon Desktop Environments'
+arch=('i686' 'x86_64')
+url='https://launchpad.net/gala'
+license=('GPL3')
+depends=('gconf' 'gnome-keyring' 'gnome-session' 'gnome-settings-daemon' 'polkit-gnome' 'slingshot-launcher-bzr' 'plank-bzr' 'xdg-user-dirs-gtk')
+if pacman -Qq super-wingpanel-unstable-bzr >/dev/null 2>&1; then
+  depends+=('super-wingpanel-unstable-bzr')
+else
+  depends+=('wingpanel-bzr')
+fi
+makedepends=('bzr' 'gnome-common' 'intltool')
+conflicts=(gala{,-bzr} pantheon-session{,-bzr})
+install='gala.install'
+source=("pantheon-session::bzr+lp:~elementary-os/elementaryos/pantheon-xsession-settings"
+        'pantheon-session.sh'
+        'pantheon-schema.patch')
+sha256sums=('SKIP'
+            '7a02e94ead1402a11c051db8cf831c0b1eefed05affb8363f71cdae3f55058f7')
+prepare() {
+  #Take only what we need to fix runtime depencencies (should be fixed upstream in slingshot-launcher, {super-,}wingpanel, etc)
+  bzr cat lp:gala/data/org.pantheon.desktop.gala.gschema.xml.in.in > "${srcdir}"/org.pantheon.desktop.gala.gschema.xml
+  cd "${srcdir}"
+  patch -Np3 < pantheon-schema.patch
+
+  export pkgvergala="$(printf "r%s" "$(bzr revno lp:gala)")"
+
+  cd "${srcdir}"/pantheon-session
+
+  export pkgverpantheonsession="$(printf "r%s" "$(bzr revno)")"
+
+  sed 's/policykit-1/polkit/' -i autostart/polkit-gnome-authentication-agent-1-pantheon.desktop
+  sed 's|gnome-session --session=pantheon|/usr/bin/pantheon-session|' -i debian/pantheon.desktop
+
+  # TODO: sort and tweak pantheon-session's settings
+
+  # This space reserved for pantheon-default-settings-bzr
+}
+
+provides=(gala{,-bzr}="${pkgvergala}" pantheon-session{,-bzr}="${pkgverpantheonsession}")
+
+package() {
+
+  cd "${srcdir}"/
+  install -Dm644 "${srcdir}"/org.pantheon.desktop.gala.gschema.xml "${pkgdir}"/usr/share/glib-2.0/schemas/org.pantheon.desktop.gala.gschema.xml
+
+  cd "${srcdir}"/pantheon-session
+
+  mkdir -p "${pkgdir}"/{etc/xdg,usr/share/pantheon}
+  cp -dr --no-preserve='ownership' autostart "${pkgdir}/etc/xdg/"
+  cp -dr --no-preserve='ownership' gconf "${pkgdir}/usr/share/GConf"
+  cp -dr --no-preserve='ownership' unity-greeter "${pkgdir}/usr/share/"
+  cp -dr --no-preserve='ownership' applications "${pkgdir}/usr/share/pantheon/"
+
+  # This space reserved for pantheon-default-settings-bzr
+
+  find "${pkgdir}" -type d -exec chmod 755 {} +
+  find "${pkgdir}" -type f -exec chmod 644 {} +
+
+# gnome-session workaround
+  install -Dm755 "${srcdir}"/pantheon-session.sh "${pkgdir}"/usr/bin/pantheon-session
+
+}
+
