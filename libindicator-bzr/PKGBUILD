@@ -3,16 +3,16 @@
 # Original Maintainer: György Balló <ballogy@freestart.hu>
 # Contributor: thn81 <root@scrat>
 
-pkgbase=libindicator
-pkgname=('libindicator-bzr' 'libindicator3-bzr')
-pkgver=r529
+pkgbase=libindicator-bzr
+pkgname=(libindicator{,3}-bzr)
+pkgver=r531
 pkgrel=1
 epoch=1
-pkgdesc="A set of symbols and convience functions that all indicators would like to use"
+pkgdesc="A set of symbols and convience functions that all indicators would like to use (bzr version)"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/libindicator"
 license=('GPL')
-makedepends=('gtk2' 'gtk3' 'glib2' 'ido')
+makedepends=(gtk{2,3} 'glib2' 'ido')
 groups=('unity')
 source=("bzr+lp:libindicator")
 sha512sums=('SKIP')
@@ -46,8 +46,8 @@ build() {
 
 package_libindicator-bzr() {
   pkgdesc+=" (GTK+ 2 library)"
-  provides=("libindicator=${pkgver}" "libindicator-bzr")
-  conflicts=("libindicator")
+  provides=(libindicator{,-gtk2}{,-bzr}=${pkgver})
+  conflicts=(libindicator{,-gtk2})
   depends=('cairo' 'gtk2' 'glib2')
 
   cd "${srcdir}/libindicator/build-gtk2"
@@ -58,8 +58,8 @@ package_libindicator-bzr() {
 
 package_libindicator3-bzr() {
   pkgdesc+=" (GTK+ 3 library)"
-  provides=("libindicator3=${pkgver}" "libindicator-gtk3" "libindicator3-bzr" "libindicator-gtk3-bzr")
-  conflicts=("libindicator3" "libindicator-gtk3")
+  provides=(libindicator{3,-gtk3}{,-bzr}=${pkgver})
+  conflicts=(libindicator{3,-gtk3})
   depends=('gtk3' 'glib2' 'ido')
   options=(${options[@]} '!emptydirs')
 
