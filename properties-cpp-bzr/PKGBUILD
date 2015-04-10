@@ -6,20 +6,21 @@
 pkgname=properties-cpp-bzr
 pkgver=r17
 pkgrel=1
-epoch=1
 pkgdesc="Widgets and other objects used for indicators"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/properties-cpp"
 license=('LGPL')
 depends=( )
-makedepends=( 'cmake' 'doxygen' 'gmock' 'graphviz' 'gtest' 'lcov' 'gcovr')
+makedepends=( 'cmake' 'doxygen' 'gmock' 'graphviz' 'gtest' 'lcov' 'gcovr' 'astyle' 'pbuilder-ubuntu' )
 groups=('unity')
 provides=('properties-cpp')
 conflicts=('properties-cpp')
 source=("bzr+lp:properties-cpp"
-        'find-on-arch.patch')
+        'find-on-arch.patch'
+        'nostylesheetthere.patch')
 sha512sums=('SKIP'
-            'd94b53a8f5245559796a94cdb4273a5e49ded591b2c760ddd4d9e2d05553d508d62862ba6988e622b37f147640993cd908a1290ca4c927b6defb1bee2261d843')
+            '65570a10ea62bfe766ce4c8e370bfb8ea05d93d23e084a7edb781becabc45534087af1ba63b6073f9d0dec422bff900341ebafa0dda088816b9d5c928c7426a9'
+            '844bba8577b00808624cf148b27c48620a364142b1ba9b92e2b3b2aa22d065e4319562bad997d35fb97c325126b4d0b23e8ddd2a72f76ea00cb176464b8fdf81')
 
 pkgver() {
   cd properties-cpp
@@ -30,6 +31,11 @@ pkgver() {
 prepare() {
   #find dependencies based on their arch installation paths
   patch -Np1 < find-on-arch.patch
+
+  #What is this even about?
+  #How is it possible that anyone, anywhere, ever compiled this package?
+  patch -Np1 < nostylesheetthere.patch
+
 }
 
 build() {
