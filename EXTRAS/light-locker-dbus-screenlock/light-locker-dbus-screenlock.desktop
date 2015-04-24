@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Light-locker DBus Screenlock
-Comment=Replace gnome-screensaver DBus service to call light-locker
-TryExec=light-locker-dbus-screenlock.py
-Exec=light-locker-dbus-screenlock.py
-NotShownIn=Gnome;Unity
