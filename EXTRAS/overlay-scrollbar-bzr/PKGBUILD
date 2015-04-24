@@ -1,16 +1,16 @@
 # Maintainer: quequotion <quequotion@bugmenot.com>
 # Contributor: Xiao-Long Chen <chenxiaolong@cxl.epac.to>
 
-pkgname=('overlay-scrollbar-bzr' 'liboverlay-scrollbar-bzr' 'liboverlay-scrollbar3-bzr')
+pkgname=({overlay-scrollbar,liboverlay-scrollbar{,3}}-bzr)
 pkgbase=overlay-scrollbar-bzr
-pkgver=r385
-pkgrel=1
-epoch=1
+pkgver=r391
+pkgrel=2
 pkgdesc="Ayatana Scrollbars use an overlay to ensure that scrollbars take up no active screen real-estate."
 arch=('i686' 'x86_64')
 url="https://launchpad.net/ayatana-scrollbar"
 license=('LGPL')
 groups=('unity')
+provides=({overlay-scrollbar,liboverlay-scrollbar{,3}}-bzr=$pkgver)
 makedepends=('gtk2-ubuntu' 'gtk3')
 options=('!emptydirs')
 extrafiles=('overlay-scrollbar.install')
