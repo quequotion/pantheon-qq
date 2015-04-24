@@ -4,7 +4,7 @@
 # Contributor: thn81 <root@scrat>
 
 pkgname=indicator-power-bzr
-pkgver=r2
+pkgver=279
 pkgrel=1
 pkgdesc="An indicator to show the power status of your devices"
 arch=('i686' 'x86_64')
