@@ -24,7 +24,7 @@ index 694463e..d921b9a 100644
  find_package(Vala 0.20)
  
  find_package(GObjectIntrospection 0.9.12)
-@@ -72,12 +66,3 @@ configure_file(
+@@ -72,10 +66,4 @@ )
  
  add_subdirectory(data)
  add_subdirectory(src)
@@ -34,9 +34,7 @@ index 694463e..d921b9a 100644
 -set (GTEST_SOURCE_DIR /usr/src/gtest/src)
 -set (GTEST_INCLUDE_DIR ${GTEST_SOURCE_DIR}/..)
 -set (GTEST_LIBS -lpthread)
--
--add_subdirectory(tests)
--
+ 
 -- 
 1.9.1
 
