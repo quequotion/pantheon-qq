@@ -4,11 +4,10 @@
 # Contributor: thn81 <root@scrat>
 
 pkgbase=libdbusmenu-bzr
-pkgname=('libdbusmenu-glib-bzr' 'libdbusmenu-gtk2-bzr' 'libdbusmenu-gtk3-bzr')
+pkgname=(libdbusmenu-{glib,gtk{2,3}}-bzr)
 # Ubuntu: please stop changing your versioning scheme
-pkgver=r473
+pkgver=r477
 pkgrel=1
-epoch=1
 pkgdesc="A small little library that was created by pulling out some comon code out of indicator-applet"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/dbusmenu"
@@ -50,8 +49,7 @@ build() {
   [[ -d build-gtk2 ]] || mkdir build-gtk2
   pushd build-gtk2
   ../configure --prefix=/usr --libexecdir=/usr/lib/libdbusmenu --disable-scrollkeeper --with-gtk=2 --disable-static
-  export MAKEFLAGS="-j1"
-  make
+  make -j1
   popd
 
   [[ -d build-gtk3 ]] || mkdir build-gtk3
@@ -67,7 +65,7 @@ build() {
 
 package_libdbusmenu-glib-bzr() {
   depends=('json-glib')
-  provides=("libdbusmenu-glib=${pkgver}" "libdbusmenu-glib-bzr")
+  provides=(libdbusmenu-glib{,-bzr}=${pkgver})
   conflicts=('libdbusmenu-glib')
 
   cd "${srcdir}/libdbusmenu/build-gtk3"
@@ -83,8 +81,8 @@ package_libdbusmenu-glib-bzr() {
 package_libdbusmenu-gtk2-bzr() {
   pkgdesc+=" (GTK+ 2 library)"
   depends=('gtk2' "libdbusmenu-glib=${pkgver}")
-  provides=("libdbusmenu=${pkgver}" 'libdbusmenu-bzr' 'libdbusmenu-gtk2' 'libdbusmenu-gtk2-bzr')
-  conflicts=('libdbusmenu-gtk2')
+  provides=(libdbusmenu{,-gtk2}{,-bzr}=${pkgver})
+  conflicts=(libdbusmenu{,-gtk2})
   cd "${srcdir}/libdbusmenu/build-gtk2"
 
   export MAKEFLAGS="-j1"
@@ -95,8 +93,8 @@ package_libdbusmenu-gtk2-bzr() {
 package_libdbusmenu-gtk3-bzr(){
   pkgdesc+=" (GTK+ 3 library)"
   depends=('gtk3' "libdbusmenu-glib=${pkgver}")
-  provides=('libdbusmenu-gtk3' 'libdbusmenu-gtk3-bzr')
-  conflicts=('libdbusmenu-gtk3')
+  provides=(libdbusmenu-gtk3{,-bzr}=${pkgver})
+  conflicts=(libdbusmenu{,-gtk3,3)
   cd "${srcdir}/libdbusmenu/build-gtk3"
 
   export MAKEFLAGS="-j1"
