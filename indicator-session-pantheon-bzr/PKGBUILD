@@ -4,9 +4,8 @@
 # Contributor: thn81 <root@scrat>
 
 pkgname=indicator-session-pantheon-bzr
-pkgver=r6
-pkgrel=1
-epoch=1
+pkgver=r8
+pkgrel=2
 pkgdesc="Indicator showing session management, status and user switching"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-session"
