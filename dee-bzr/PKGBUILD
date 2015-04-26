@@ -2,9 +2,8 @@
 # Contributor: Xiao-Long Chen <chenxiaolong@cxl.epac.to>
 
 pkgname=dee-bzr
-pkgver=r435
+pkgver=r437
 pkgrel=1
-epoch=1
 pkgdesc="Model to synchronize multiple instances over DBus"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/dee"
@@ -12,8 +11,8 @@ license=('LGPL')
 groups=('unity')
 depends=('dbus-glib' 'glib2' 'icu' 'python' 'python-gobject' 'python2' 'python2-gobject')
 makedepends=('gnome-common' 'gobject-introspection' 'gtk-doc' 'vala')
-provides=('dee=${pkgver}' 'dee-ubuntu')
-conflicts=('dee')
+provides=(dee{,-ubuntu}{,-bzr}=${pkgver})
+conflicts=(dee{,-ubuntu})
 source=("bzr+lp:dee")
 sha512sums=('SKIP')
 
