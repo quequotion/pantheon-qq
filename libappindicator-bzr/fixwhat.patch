@@ -1,10 +1,21 @@
---- src/libappindicator/src/app-indicator.c	2015-02-05 02:06:40.061527884 +0900
-+++ src/libappindicator/src/app-indicator.c	2015-02-05 02:06:53.914417292 +0900
+--- src/libappindicator/src/app-indicator.c~	2015-04-27 03:20:28.736867362 +0900
++++ src/libappindicator/src/app-indicator.c	2015-04-27 03:40:02.954199460 +0900
+@@ -50,7 +50,7 @@
+ 
+ #define PANEL_ICON_SUFFIX  "panel"
+ 
+-*
++/*
+  * AppIndicatorPrivate:
+  * All of the private data in an instance of an application indicator.
+  *
+--- src/libappindicator/src/app-indicator.c~	2015-04-27 03:47:40.158022733 +0900
++++ src/libappindicator/src/app-indicator.c	2015-04-27 03:49:00.755518998 +0900
 @@ -50,18 +50,18 @@
  
  #define PANEL_ICON_SUFFIX  "panel"
  
--/**
+-*
 +/*
   * AppIndicatorPrivate:
   * All of the private data in an instance of an application indicator.
