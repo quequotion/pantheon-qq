@@ -5,8 +5,7 @@
 
 pkgname=indicator-application-pantheon-bzr
 pkgver=r2
-pkgrel=1
-epoch=1
+pkgrel=2
 pkgdesc="A library and indicator to take menus from applications and place them in the panel"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-application"
