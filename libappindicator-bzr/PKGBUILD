@@ -14,11 +14,9 @@ license=('LGPL')
 makedepends=('dbus-glib' 'libindicator' 'libindicator3' 'libdbusmenu-gtk2' 'libdbusmenu-gtk3' 'gobject-introspection' 'vala' 'gtk-sharp-2' 'pygtk' 'perl-xml-libxml' 'gtk-doc')
 groups=('unity')
 source=("bzr+lp:libappindicator"
-        '0001_Timeout.patch'
-        'fixwhat.patch')
+        '0001_Timeout.patch')
 sha512sums=('SKIP'
-            'b14f77a93473d7ef92a76aff0185010858f130dfe8c140b78876c6cc3e835508e66063139fc4adc469d81b6b9bec0c04fab77a990fef67df00ed95c4b905046d'
-            '6bba685c7fa0651ab4bf1634a934d884818437f268f5cea7def5463bf440a91179209ff3a83e05ae3ebdef8fb25bd3838f351c8ce7ec0f62de3728fce78d46b4')
+            'b14f77a93473d7ef92a76aff0185010858f130dfe8c140b78876c6cc3e835508e66063139fc4adc469d81b6b9bec0c04fab77a990fef67df00ed95c4b905046d')
 
 pkgver() {
   cd libappindicator
@@ -42,8 +40,6 @@ prepare() {
 
 
   #patch -Np2 -i "${srcdir}/fixwhat.patch"
-
-  #sed -i 's| \* \@| \* |g' src/app-indicator.c
 }
 
 build() {
@@ -67,9 +63,9 @@ build() {
 
 package_libappindicator-bzr() {
   pkgdesc+=" (GTK+ 2 library)"
-  provides=(libappindicator{,-gtk2}{,-bzr}=${pkgver})
+  provides=(libappindicator{,-gtk2,sharp}{,-bzr}=${pkgver})
   depends=('libindicator' 'libdbusmenu-gtk2')
-  conflicts=('indicator-application<0.2.91' libappindicator{,-gtk2})
+  conflicts=('indicator-application<0.2.91' libappindicator{,-gtk2,-sharp})
 
   cd "${srcdir}/libappindicator/build-gtk2"
 
