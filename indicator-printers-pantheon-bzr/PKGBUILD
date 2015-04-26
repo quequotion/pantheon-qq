@@ -3,8 +3,7 @@
 
 pkgname=indicator-printers-pantheon-bzr
 pkgver=r0
-pkgrel=1
-epoch=1
+pkgrel=2
 pkgdesc="Indicator showing active print jobs"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-printers"
