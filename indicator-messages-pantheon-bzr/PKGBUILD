@@ -5,8 +5,7 @@
 
 pkgname=indicator-messages-pantheon-bzr
 pkgver=r4
-pkgrel=1
-epoch=1
+pkgrel=2
 pkgdesc="A place on the user's desktop that collects messages that need a response"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-messages"
