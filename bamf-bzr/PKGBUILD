@@ -5,9 +5,8 @@
 
 pkgname=bamf-bzr
 pkgver=r611
-pkgrel=1
-epoch=1
-pkgdesc="Removes the headache of applications matching into a simple DBus daemon and c wrapper library"
+pkgrel=2
+pkgdesc="Applications matching DBus daemon and c wrapper library - relocated cache"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/bamf"
 license=('GPL')
