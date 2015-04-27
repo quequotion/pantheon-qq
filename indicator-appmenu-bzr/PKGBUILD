@@ -4,9 +4,8 @@
 # Contributor: thn81 <root@scrat>
 
 pkgname=indicator-appmenu-bzr
-pkgver=r262
+pkgver=r270
 pkgrel=1
-epoch=1
 pkgdesc="An indicator to host the menus from an application"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/indicator-appmenu"
