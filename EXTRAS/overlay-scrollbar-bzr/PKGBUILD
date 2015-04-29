@@ -5,12 +5,11 @@ pkgname=({overlay-scrollbar,liboverlay-scrollbar{,3}}-bzr)
 pkgbase=overlay-scrollbar-bzr
 pkgver=r391
 pkgrel=2
-pkgdesc="Ayatana Scrollbars use an overlay to ensure that scrollbars take up no active screen real-estate."
+pkgdesc="Ayatana Scrollbars, pointer-triggered overlay scrollbars to save screen real-estate."
 arch=('i686' 'x86_64')
 url="https://launchpad.net/ayatana-scrollbar"
 license=('LGPL')
 groups=('unity')
-provides=({overlay-scrollbar,liboverlay-scrollbar{,3}}-bzr=$pkgver)
 makedepends=('gtk2-ubuntu' 'gtk3')
 options=('!emptydirs')
 extrafiles=('overlay-scrollbar.install')
@@ -42,10 +41,10 @@ build() {
 }
 
 package_overlay-scrollbar-bzr() {
-  pkgdesc="Scrollbar overlayed widget"
-  depends=('dconf' 'liboverlay-scrollbar' 'liboverlay-scrollbar3')
-  provides=('overlay-scrollbar' 'overlay-scrollbar-bzr')
-  conflicts=('overlay-scrollbar' 'overlay-scrollbar-bzr')
+  pkgdesc+="Configuration and metapackage"
+  depends=('dconf' liboverlay-scrollbar{,3})
+  provides=(overlay-scrollbar{,-bzr}="${pkgver}")
+  conflicts=(overlay-scrollbar)
   install=overlay-scrollbar.install
 
   cd "${srcdir}/overlay-scrollbar/build-gtk3/"
@@ -61,10 +60,10 @@ package_overlay-scrollbar-bzr() {
 }
 
 package_liboverlay-scrollbar3-bzr() {
-  pkgdesc="Scrollbar overlayed widget - GTK 3 library"
+  pkgdesc+=" gtk3"
   depends=('cairo' 'gtk3')
-  provides=('liboverlay-scrollbar3' 'liboverlay-scrollbar3-bzr')
-  conflicts=('liboverlay-scrollbar3' 'liboverlay-scrollbar3-bzr')
+  provides=(liboverlay-scrollbar{3,-gtk3}{,-bzr}="${pkgver}")
+  conflicts=('liboverlay-scrollbar3')
 
   cd "${srcdir}/overlay-scrollbar/build-gtk3/"
   make DESTDIR="${pkgdir}/" install
@@ -74,10 +73,10 @@ package_liboverlay-scrollbar3-bzr() {
 }
 
 package_liboverlay-scrollbar-bzr() {
-  pkgdesc="Scrollbar overlayed widget - GTK 2 library"
+  pkgdesc+=" gtk2"
   depends=('gtk2-ubuntu')
-  provides=('liboverlay-scrollbar' 'liboverlay-scrollbar-bzr')
-  conflicts=('liboverlay-scrollbar' 'liboverlay-scrollbar-bzr')
+  provides=(liboverlay-scrollbar{,-gtk2}{,-bzr}="${pkgver}")
+  conflicts=('liboverlay-scrollbar')
 
   cd "${srcdir}/overlay-scrollbar/build-gtk2/"
   make DESTDIR="${pkgdir}/" install
