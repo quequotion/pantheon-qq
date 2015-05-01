@@ -1,0 +1,51 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Xiao-Long Chen <chenxiaolong@cxl.epac.to>
+# Original Maintainer: Balló György <ballogy@freestart.hu>
+# Contributor: thn81 <root@scrat>
+
+pkgname=pantheon-filechooser-module-bzr
+pkgver=1
+pkgrel=1
+pkgdesc="Custom Pantheon Filechooser (GTK3 module)"
+arch=('i686' 'x86_64')
+url="https://code.launchpad.net/~donadigo/pantheon-gtk-modules/filechooser-module"
+license=('GPL')
+depends=('gtk3')
+makedepends=('cmake' 'vala')
+provides=(pantheon-filechooser-module{,-bzr})
+conflicts=('pantheon-filechooser-module')
+groups=(pantheon{,-bzr-qq})
+source=("bzr+lp:~donadigo/pantheon-gtk-modules/filechooser-module")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd filechooser-module
+  bzr revno
+}
+
+#prepare() {
+#  cd "${srcdir}/pantheon-filechooser-module"
+#}
+
+build() {
+  cd "${srcdir}/filechooser-module"
+
+  export CFLAGS+=" -Wno-error"
+
+  rm -rf build; mkdir build; cd build
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -Denable_tests=OFF
+  make
+}
+
+package() {
+  cd "${srcdir}/filechooser-module/build/"
+
+  make DESTDIR="${pkgdir}/" install
+
+  #TODO: Install location is a bit overly specific.
+  cd "${pkgdir}/"
+  mkdir -p usr/lib/gtk-3.0/modules/
+  cd usr/lib/gtk-3.0/modules/
+  ln -s {../../x86_64-linux-gnu/gtk-3.0/modules/,}libpantheon-filechooser-module.so
+}
+
