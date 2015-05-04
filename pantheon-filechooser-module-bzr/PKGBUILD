@@ -4,18 +4,18 @@
 # Contributor: thn81 <root@scrat>
 
 pkgname=pantheon-filechooser-module-bzr
-pkgver=1
+pkgver=1823
 pkgrel=1
 pkgdesc="Custom Pantheon Filechooser (GTK3 module)"
 arch=('i686' 'x86_64')
-url="https://code.launchpad.net/~donadigo/pantheon-gtk-modules/filechooser-module"
+url="https://code.launchpad.net/~donadigo/pantheon-files/filechooser-module"
 license=('GPL')
 depends=('gtk3')
 makedepends=('cmake' 'vala')
 provides=(pantheon-filechooser-module{,-bzr})
 conflicts=('pantheon-filechooser-module')
 groups=(pantheon{,-bzr-qq})
-source=("bzr+lp:~donadigo/pantheon-gtk-modules/filechooser-module")
+source=("bzr+lp:~donadigo/pantheon-files/filechooser-module")
 sha512sums=('SKIP')
 
 pkgver() {
@@ -34,11 +34,12 @@ build() {
 
   rm -rf build; mkdir build; cd build
   cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -Denable_tests=OFF
+  cd filechooser-module
   make
 }
 
 package() {
-  cd "${srcdir}/filechooser-module/build/"
+  cd "${srcdir}/filechooser-module/build/filechooser-module"
 
   make DESTDIR="${pkgdir}/" install
 
