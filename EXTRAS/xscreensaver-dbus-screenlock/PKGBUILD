@@ -14,7 +14,7 @@ conflicts=('gnome-screensaver')
 source=('xscreensaver-dbus-screenlock.py'
 	'xscreensaver-dbus-screenlock.desktop')
 md5sums=('0a1f60e3834481b1b3043d484d4ffcf7'
-         'aeaa9e6597df52fafb320186b1825c03')
+         'd334857a577f92413ddf5d16df79c15c')
 
 package() {
 
