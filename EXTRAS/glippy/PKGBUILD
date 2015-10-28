@@ -1,17 +1,17 @@
-# Maintainer: Eduardo Reveles <me@osiux.ws>
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Eduardo Reveles <me@osiux.ws>
 # Contributor: Shem Valentine <archlinux@valentinenews.net>
 # Contributor: Lael Guillemenot <zeppelinlg@gmail.com>
 
 pkgname=glippy
 pkgver=0.6
-_majorver=1.0
-pkgrel=5
+pkgrel=6
 pkgdesc="not so simple clipboard manager for GNOME"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/glippy"
 license=('GPL')
-depends=('mono' 'gnome-sharp')
-makedepends=('automake' 'indicator-application')
+depends=('mono' 'gnome-sharp' 'libappindicator-gtk2' 'indicator-application')
+makedepends=('automake')
 options=(!emptydirs)
 install=$pkgname.install
 source=("http://hugsmile.eu/file/src/${pkgname}-${pkgver}.tar.gz"
