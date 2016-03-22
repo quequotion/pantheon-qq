@@ -1,9 +1,0 @@
---- src/os-patch-indicator-session-trusty/data/com.canonical.indicator.session.gschema.xml.in~	2014-07-23 05:45:14.182872000 +0900
-+++ src/os-patch-indicator-session-trusty/data/com.canonical.indicator.session.gschema.xml.in	2014-07-23 05:59:51.852899015 +0900
-@@ -1,5 +1,5 @@
- <schemalist>
--  <schema id="com.canonical.indicator.session" path="/apps/indicator-session/">
-+  <schema id="com.canonical.indicator.session" path="/com/canonical/indicator/session/">
-     <key name="suppress-logout-restart-shutdown" type="b">
-       <default>false</default>
-       <_summary>Suppress the dialog to confirm logout, restart and shutdown action</_summary>
