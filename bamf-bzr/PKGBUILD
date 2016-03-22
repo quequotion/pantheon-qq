@@ -4,8 +4,8 @@
 # Contributor: thn81 <root@scrat>
 
 pkgname=bamf-bzr
-pkgver=r611
-pkgrel=2
+pkgver=r613
+pkgrel=1
 pkgdesc="Applications matching DBus daemon and c wrapper library - relocated cache"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/bamf"
