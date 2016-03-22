@@ -9,13 +9,9 @@
 # vercheck-ppa: name=${pkgname%-*}, url=ppa:gnome3-team/gnome3-staging
 
 pkgname=gnome-settings-daemon-ubuntu
-_use_ppa=true
-_ppa_rel=0ubuntu1~vivid2
-#_ppa_ver=3.16.0
-#_ubuntu_rel=2ubuntu2
-#_ubuntu_ver=3.14.2
-pkgver=3.16.2
-pkgrel=2
+pkgver=3.18.2
+_debrel=0ubuntu1
+pkgrel=3
 pkgdesc="The GNOME Settings daemon with Ubuntu's patches"
 arch=(i686 x86_64)
 url="http://www.gnome.org"
@@ -30,16 +26,9 @@ conflicts=(gnome-settings-daemon)
 options=(!emptydirs)
 install=gnome-settings-daemon.install
 source=("http://ftp.gnome.org/pub/gnome/sources/${pkgname%-*}/${pkgver%.*}/${pkgname%-*}-${pkgver}.tar.xz"
-)
-
-if [[ "${_use_ppa}" == "true" ]]; then
-    source+=("http://ppa.launchpad.net/gnome3-team/gnome3-staging/ubuntu/pool/main/g/gnome-settings-daemon/gnome-settings-daemon_${_ppa_ver:-${pkgver}}-${_ppa_rel}.debian.tar.xz")
-else
-    source+=("https://launchpad.net/ubuntu/+archive/primary/+files/gnome-settings-daemon_${_ubuntu_ver:-${pkgver}}-${_ubuntu_rel}.debian.tar.xz")
-fi
-
-sha512sums=('04f62429b6f3edf6d7c11b0fbe8b5b74a3be3d6309ec7a9019dc77d2f8557ad26242a210bcfb36b393b99d93c33590c595c6d7dca9c1272f04bdf5cfc7144076'
-            'd433e1b915a6c859d73e672542fe20d6c08f403c907fa33acd1779e8c7e260f86061505dd91eb00d19b0579916588606e3b5e380924f3fcfec6447b5b611439a')
+        "https://launchpad.net/ubuntu/+archive/primary/+files/gnome-settings-daemon_$pkgver-$_debrel.debian.tar.xz")
+sha512sums=('82aa939c485d4fa90ee135d4f987a13c6b1629546f41a1399b2badd166c0cc4e298096d860fafefa1236d3af87484bd8903fb6e39fe971660e553e28768775fc'
+            '493e87a8a7696575f12ff243ba8f8745306d23291a7436f02b4a12306296af8872f37aa6ae71fc5d13e5a276af5e204bf48196f68f988fb85cea221d94ced084')
 
 prepare() {
   cd "${pkgname%-*}-${pkgver}"
