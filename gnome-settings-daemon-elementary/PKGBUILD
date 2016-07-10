@@ -1,0 +1,75 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Michael Healy <horsemanoffaith@gmail.com>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+# Contributor: thn81 <root@scrat>
+
+# vercheck-pkgbuild: auto
+# vercheck-ubuntu: name=${pkgname%-*}, repo=xenial
+# vercheck-archlinux: name=${pkgname%-*}, repo=extra, arch=x86_64
+# vercheck-gnome: name=${pkgname%-*}, majorver=3.19
+# vercheck-ppa: name=${pkgname%-*}, url=ppa:gnome3-team/gnome3-staging
+
+pkgname=gnome-settings-daemon-elementary
+_ppa_rel=0ubuntu1~xenial1
+_ppa_ver=3.19.92
+#_ubuntu_rel=0ubuntu3
+#_ubuntu_ver=3.18.2
+pkgver=3.19.92
+pkgrel=1
+pkgdesc="The GNOME Settings daemon with Ubuntu and Elementary's patches"
+arch=(i686 x86_64)
+url="http://www.gnome.org"
+license=(GPL)
+depends=(dconf gnome-desktop gsettings-desktop-schemas-ubuntu hicolor-icon-theme
+         libcanberra-pulse libnotify libsystemd libwacom pulseaudio
+         pulseaudio-alsa upower librsvg libgweather geocode-glib geoclue2 nss)
+makedepends=(intltool xf86-input-wacom libxslt docbook-xsl python2)
+groups=(gnome unity)
+provides=(gnome-settings-daemon{,-ubuntu}="${pkgver}")
+conflicts=(gnome-settings-daemon{,-ubuntu})
+options=(!emptydirs)
+install=gnome-settings-daemon.install
+source=("http://ftp.gnome.org/pub/gnome/sources/${pkgname%-*}/${pkgver%.*}/${pkgname%-*}-${pkgver}.tar.xz"
+        "https://launchpad.net/~gnome3-team/+archive/ubuntu/gnome3-staging/+files/gnome-settings-daemon_${_ppa_ver:-${pkgver}}-${_ppa_rel}.debian.tar.xz"
+        manage-dpms.patch)
+sha512sums=('7a243216e19520937c90c8b7e5a18081721cf82e7f936a27352e7ceac0acd3cf638a7ef7130b20f63e75172d0fa44c4d104b39a0c6dcb15e1af9cf72d28e6f07'
+            '86b149a70e0bcb0af01e2b1cb7b7ee63cc4ae115539b446e78cb2fb11ce40ae6c1dc7f98d7b28d1e3293f1141a9135b5c9ef1f6c6f78ebbca4b1d754adfe600b'
+            '60e1442552907ba6b5bf561b349a651676ff98aa54d6a80556311311b4e33bb2ab11214b198ad021d6a6c05de8f52037a44fadd7e91870ba6cea556e65b40db2')
+
+prepare() {
+  cd "${pkgname%-*}-${pkgver}"
+
+  # Apply Ubuntu's patches
+  for i in $(grep -v '#' "$srcdir/debian/patches/series" | sort); do
+    [[ "${i}" =~ ^# || -z "${i}" || "${i}" == *git* ]] && continue # Skip comments, newlines, and git patches
+    [[ "${i}" == 53_sync_input_sources_to_accountsservice.patch ]] && continue
+    msg2 "Applying $i ..."
+    patch -Np1 < "$srcdir/debian/patches/$i"
+  done
+
+  # Apply Elementary's patches
+  patch -Np0 < ../manage-dpms.patch
+}
+
+build() {
+  cd "${pkgname%-*}-${pkgver}"
+
+  autoreconf -vfi
+
+  ./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --libexecdir=/usr/lib/gnome-settings-daemon \
+    --disable-static
+      
+  # https://bugzilla.gnome.org/show_bug.cgi?id=656231
+  sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+  make
+}
+
+package() {
+  cd "${pkgname%-*}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+}
