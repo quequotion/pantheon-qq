@@ -18,7 +18,7 @@ install=$pkgname.install
 source=("http://hugsmile.eu/file/src/${pkgname}-${pkgver}.tar.gz"
         'enable-indicator.patch')
 md5sums=('b1b74a867ab50245f4f360a50856a483'
-         '863fd5474fde072078ef3298a09bb5c7')
+         '60cb2f667f377c72b7923145d154a262')
 
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}/"

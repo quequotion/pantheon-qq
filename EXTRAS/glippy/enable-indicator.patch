@@ -5,7 +5,7 @@
        <owner>glippy</owner>
        <type>string</type>
 -      <default>libglippytray|libglippysnippets|libglippyupload</default>
-+      <default>libglippyindicator|libglippysnippets|libglippyupload</default>
++      <default>libglippyindicator|libglippytray|libglippysnippets|libglippyupload</default>
        <gettext_domain>glippy</gettext_domain>
        <locale name="C">
           <short>List of plugins</short>
