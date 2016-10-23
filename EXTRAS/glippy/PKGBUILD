@@ -3,16 +3,18 @@
 # Contributor: Shem Valentine <archlinux@valentinenews.net>
 # Contributor: Lael Guillemenot <zeppelinlg@gmail.com>
 
-pkgname=glippy
+pkgname=glippy-indicator
 pkgver=0.6
 pkgrel=6
-pkgdesc="not so simple clipboard manager for GNOME"
+pkgdesc="not so simple clipboard manager for GNOME, Appindicator enabled"
 arch=('i686' 'x86_64')
 url="https://launchpad.net/glippy"
 license=('GPL')
 depends=('mono' 'gnome-sharp')
 optdepends=('libappindicator-gtk2' indicator-application{,-gtk2})
 makedepends=('automake' 'libappindicator-sharp')
+provides=('glippy')
+conflicts=('glippy')
 options=(!emptydirs)
 install=$pkgname.install
 source=("http://hugsmile.eu/file/src/${pkgname}-${pkgver}.tar.gz"

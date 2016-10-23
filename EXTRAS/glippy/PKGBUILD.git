@@ -1,8 +1,9 @@
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
 # Maintainer: Eduardo Reveles <me@osiux.ws>
 # Contributor: Shem Valentine <archlinux@valentinenews.net>
 # Contributor: Lael Guillemenot <zeppelinlg@gmail.com>
 
-pkgname=glippy-git
+pkgname=glippy-indicator-git
 pkgver=0.6
 _majorver=1.0
 pkgrel=5
@@ -13,6 +14,8 @@ license=('GPL')
 depends=('mono' 'gnome-sharp')
 optdepends=('libappindicator-gtk2' indicator-application{,-gtk2})
 makedepends=('automake' 'libappindicator-sharp')
+provides=('glippy')
+conflicts=('glippy')
 options=(!emptydirs)
 install=$pkgname.install
 source=("git+http://http://github.com/quequotion/glippy"
