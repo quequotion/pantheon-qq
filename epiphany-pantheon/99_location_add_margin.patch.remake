@@ -1,0 +1,10 @@
+--- a/src/ephy-title-box.c
++++ b/src/ephy-title-box.c
+@@ -146,6 +146,7 @@
+ ephy_title_box_add_address_bar (EphyTitleBox *title_box)
+ {
+   title_box->entry = ephy_location_entry_new ();
++  gtk_widget_set_margin_bottom (GTK_ENTRY (title_box->entry), 1);
+   gtk_widget_show (title_box->entry);
+   gtk_stack_add_named (GTK_STACK (title_box), title_box->entry, "address-bar");
+ }
