@@ -1,0 +1,105 @@
+--- slingshot-launcher.orig/src/SlingshotView.vala
++++ slingshot-launcher/src/SlingshotView.vala
+@@ -204,6 +204,7 @@ namespace Slingshot {
+             container.attach (stack, 0, 1, 1, 1);
+ 
+             event_box = new Gtk.EventBox ();
++            event_box.add_events (Gdk.EventMask.SCROLL_MASK | Gdk.EventMask.KEY_PRESS_MASK | Gdk.EventMask.KEY_RELEASE_MASK);
+             event_box.add (container);
+             // Add the container to the dialog's content area
+ 
+@@ -233,7 +234,6 @@ namespace Slingshot {
+             });
+ 
+             event_box.key_press_event.connect (on_key_press);
+-            search_entry.key_press_event.connect (on_key_press);
+             // Showing a menu reverts the effect of the grab_device function.
+             search_entry.search_changed.connect (() => {
+                 if (modality != Modality.SEARCH_VIEW)
+@@ -384,7 +385,8 @@ namespace Slingshot {
+                 case "Enter": // "KP_Enter"
+                 case "Return":
+                 case "KP_Enter":
+-                    return false;
++                    search_entry.key_press_event (event);
++                    return true;
+ 
+                 case "Alt_L":
+                 case "Alt_R":
+@@ -403,7 +405,10 @@ namespace Slingshot {
+                     int page = int.parse (key);
+ 
+                     if (event.state != Gdk.ModifierType.MOD1_MASK)
+-                        return false;
++                    {
++                        search_entry.key_press_event (event);
++                        return true;
++                    }
+ 
+                     if (modality == Modality.NORMAL_VIEW) {
+                         if (page < 0 || page == 9)
+@@ -416,7 +421,8 @@ namespace Slingshot {
+                         else
+                             category_view.app_view.go_to_number (page);
+                     } else {
+-                        return false;
++                        search_entry.key_press_event (event);
++                        return true;
+                     }
+                     search_entry.grab_focus ();
+                     break;
+@@ -515,17 +521,19 @@ namespace Slingshot {
+                     if (event.state == Gdk.ModifierType.SHIFT_MASK) { // Shift + Delete
+                         search_entry.text = "";
+                     } else if (search_entry.has_focus) {
+-                        return false;
++                        search_entry.key_press_event (event);
++                        return true;
+                     } else {
+                         search_entry.grab_focus ();
+                         search_entry.move_cursor (Gtk.MovementStep.BUFFER_ENDS, 0, false);
+-                        return false;
++                        return true;
+                     }
+                     break;
+ 
+                 case "Home":
+                     if (search_entry.text.length > 0) {
+-                        return false;
++                        search_entry.key_press_event (event);
++                        return true;
+                     }
+ 
+                     if (modality == Modality.NORMAL_VIEW) {
+@@ -538,7 +546,8 @@ namespace Slingshot {
+ 
+                 case "End":
+                     if (search_entry.text.length > 0) {
+-                        return false;
++                        search_entry.key_press_event (event);
++                        return true;
+                     }
+ 
+                     if (modality == Modality.NORMAL_VIEW) {
+@@ -554,7 +563,8 @@ namespace Slingshot {
+                     if ((event.state & (Gdk.ModifierType.CONTROL_MASK | Gdk.ModifierType.SHIFT_MASK)) != 0) {
+                         search_entry.paste_clipboard ();
+                     } else {
+-                        return false;
++                        search_entry.key_press_event (event);
++                        return true;
+                     }
+                     break;
+ 
+@@ -562,9 +572,9 @@ namespace Slingshot {
+                     if (!search_entry.has_focus) {
+                         search_entry.grab_focus ();
+                         search_entry.move_cursor (Gtk.MovementStep.BUFFER_ENDS, 0, false);
+-                        search_entry.key_press_event (event);
+                     }
+-                    return false;
++                    search_entry.key_press_event (event);
++                    return true;
+ 
+             }
+ 

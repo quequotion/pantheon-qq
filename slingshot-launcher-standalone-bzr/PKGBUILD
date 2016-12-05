@@ -17,12 +17,17 @@ makedepends=('bzr' 'cmake' 'vala')
 provides=('slingshot-launcher')
 conflicts=('slingshot-launcher')
 install='slingshot-launcher.install'
-source=('slingshot-launcher::bzr+lp:slingshot#revision=700'
+#source=('slingshot-launcher::bzr+lp:slingshot#revision=700'
+source=('slingshot-launcher::bzr+lp:slingshot'
         'no-gala.patch'
-        'enable-im.patch')
+        'enable-im.patch'
+        'pantheon-debian-enable-im.patch'
+        'gandalfn-enable-im.patch')
 sha256sums=('SKIP'
             '869a6fdbf0cbe9063b83876f20e223e416652469b1e76e7a3d6a0de1dd0d1a8f'
-            '02af4535567ebea5e920de5bf7f20e5d0653478f1eb4cb93992fb8c000db2b13')
+            '02af4535567ebea5e920de5bf7f20e5d0653478f1eb4cb93992fb8c000db2b13'
+            '37750f02976d73aedccb87f92c2dd2421f3968d2c6b70f5407c4bc1b458aaa01'
+            'a3b6e16dca74409c54a5afb18539d6f7fcb64fcb72c1c7bdd4a2f9275de943dc')
 
 pkgver() {
   cd slingshot-launcher
@@ -41,7 +46,14 @@ prepare() {
   # Disable functions that depend on Gala
   patch -Np2 < ../no-gala.patch
   # Allow search with input methods (fcitx, ibus, etc)
-  patch -Np2 < ../enable-im.patch
+  #patch -Np2 < ../enable-im.patch
+  # Allow search with input methods (fcitx, ibus, etc)
+  #patch -Np1 < ../pantheon-debian-enable-im.patch
+  # Allow search with input methods (fcitx, ibus, etc)
+  patch -Np0 < ../gandalfn-enable-im.patch
+
+  # experiments (scrolling?)
+  #patch -Np0 < ../revup.patch
 
 }
 
