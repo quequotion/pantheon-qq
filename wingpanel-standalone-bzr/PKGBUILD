@@ -3,7 +3,7 @@
 # Contributor: flamelab <panosfilip@gmail.com>
 
 pkgname=wingpanel-standalone-bzr
-pkgver=r154
+pkgver=r155
 pkgrel=1
 epoch=1
 pkgdesc='The Pantheon Panel (without Gala dependencies)'
@@ -17,8 +17,12 @@ makedepends=('bzr' 'cmake' 'vala')
 provides=(wingpanel{,-bzr} 'libwingpanel-2.0.so')
 conflicts=(wingpanel{,-bzr})
 install='wingpanel.install'
-source=('wingpanel::bzr+lp:wingpanel' 'minus-backgroundmanager.patch' 'minus-galaplugin.patch')
+source=('wingpanel::bzr+lp:wingpanel'
+        'dontfocuspanel.patch'
+        'minus-backgroundmanager.patch'
+        'minus-galaplugin.patch')
 sha256sums=('SKIP'
+            '21327396769bd1763cd9ea4a326491ae55655fde3cc533aeff0d19cc4db74e3f'
             '4fbdbac4496743561d2100015d5af2aa81a4f7f87423fcd8a0124bd467a67326'
             '1f50f34a7d36fc8331c1080c42c38f8208e35f4551eed97705919d304d410c95')
 
@@ -39,6 +43,7 @@ prepare() {
   #Standalone patches
   patch -Np2 < ../minus-backgroundmanager.patch
   patch -Np2 < ../minus-galaplugin.patch
+#  patch -Np2 < ../dontfocuspanel.patch
 }
 
 build() {
