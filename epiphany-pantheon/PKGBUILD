@@ -1,7 +1,7 @@
-# $Id: PKGBUILD 278499 2016-10-12 16:53:04Z heftig $
-# Maintainer: Jan de Groot <jgc@archlinux.org>
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Jan de Groot <jgc@archlinux.org>
 
-pkgname=epiphany
+pkgname=epiphany-pantheon
 pkgver=3.22.1+5+g5d281a8
 pkgrel=1
 pkgdesc="A GNOME web browser based on the WebKit rendering engine"
@@ -12,6 +12,8 @@ depends=(libsoup libnotify gsettings-desktop-schemas webkit2gtk nss iso-codes
          dconf gcr gnome-desktop libwnck3 gnome-themes-standard)
 makedepends=(intltool itstool docbook-xml startup-notification
              gobject-introspection yelp-tools autoconf-archive appstream-glib git)
+provides=('epiphany')
+conflicts=('epiphany')
 groups=(gnome)
 _commit=5d281a891b956ad714ce91d37c64438eadeca7bc  # gnome-3-22
 
@@ -23,7 +25,7 @@ _commit=5d281a891b956ad714ce91d37c64438eadeca7bc  # gnome-3-22
 #        99_preferences_remove_fonts_style_tab.patch - rather have these prefences available
 #        99_preferences_remove_text_encoding.patch - multilingual users may need this; not there anymore?
 # Too broken
-#        "99_tabs_double_click_opens_new_tab.patch.repatch" - causes segfaults on double-click tab bar
+#        "99_tabs_double_click_opens_new_tab.patch.repatch" - causes segfaults on double-click tab-bar
 #        "99_toolbar_add_bookmark_button.patch.repatch" - causes segfaults at runtime
 
 source=("epiphany-pantheon::bzr+lp:/~elementary-os/elementaryos/os-patch-epiphany-browser-xenial"
@@ -66,7 +68,7 @@ sha256sums=('SKIP'
             '42a7b820fd659fee8508a9b9a57e385c658b3b312c7a8f9456078223e4d78f22')
 
 pkgver() {
-  cd $pkgname
+  cd epiphany
 
   git submodule init
   git config --local submodule.libgd.url "$srcdir/libgd"
@@ -100,8 +102,8 @@ prepare() {
          [[ "${i}" == 99_preferences_notebook_add_margin_border.patch ]] || \
          [[ "${i}" == 99_preferences_remove_fonts_style_tab.patch ]] || \
          [[ "${i}" == 99_preferences_remove_text_encoding.patch ]] || \
-         [[ "${i}" == 99_tabs_double_click_opens_new_tab.patch ]] || \
          [[ "${i}" == 99_toolbar_add_bookmark_button.patch ]] || \
+         [[ "${i}" == 99_tabs_double_click_opens_new_tab.patch ]] || \
          [[ "${i}" == 99_urlbar_always_show.patch ]]; then
       continue # Skip reduntant or impossible to repair patches
     else
@@ -110,16 +112,16 @@ prepare() {
     fi
   done < "${srcdir}/epiphany-pantheon/debian/patches/series"
 
-  cd ../$pkgname
+  cd "$srcdir/epiphany"
   patch -Np1 -i ../pluginsdir.diff
   NOCONFIGURE=1 ./autogen.sh
 
 }
 
 build() {
-  cd $pkgname
+  cd epiphany
   ./configure --prefix=/usr --sysconfdir=/etc \
-      --localstatedir=/var --libexecdir=/usr/lib/$pkgname
+      --localstatedir=/var --libexecdir=/usr/lib/epiphany --enable-debug
 
   # https://bugzilla.gnome.org/show_bug.cgi?id=655517
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
@@ -128,6 +130,6 @@ build() {
 }
 
 package() {
-  cd $pkgname
+  cd epiphany
   make DESTDIR="$pkgdir" install
 }

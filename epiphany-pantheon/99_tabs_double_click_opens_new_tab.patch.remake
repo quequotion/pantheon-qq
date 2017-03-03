@@ -11,7 +11,7 @@
 +      (event->state & gtk_accelerator_get_default_mod_mask ()) == 0)
 +  {
 +    GtkWindow *window;
-+    window = EPHY_WINDOW (gtk_widget_get_toplevel (notebook));
++    window = EPHY_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (notebook)));
 +    GtkActionGroup *action_group;
 +    action_group = ephy_window_get_toolbar_action_group (window);
 +    GtkAction *action;
