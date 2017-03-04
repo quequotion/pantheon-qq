@@ -12,20 +12,20 @@
 @@ -152,7 +152,7 @@
  
      public void set_expanded (bool expanded) {
-         if (expanded) {
+         if (expand && !this.expanded) {
 -            Services.BackgroundManager.get_default ().remember_window ();
 +            //Services.BackgroundManager.get_default ().remember_window ();
  
-             this.expanded = expanded;
+             this.expanded = true;
  
 @@ -163,7 +163,7 @@
  
-             this.set_size_request (monitor_width, expanded ? monitor_height : -1);
-         } else {
+             this.set_size_request (monitor_width, monitor_height);
+         } else if (!expand) {
 -            Services.BackgroundManager.get_default ().restore_window ();
 +            //Services.BackgroundManager.get_default ().restore_window ();
  
-             this.expanded = expanded;
+             this.expanded = false;
  
 --- src/wingpanel/src/Widgets/Panel.vala	2016-10-22 00:14:45.485792472 +0900
 +++ src/wingpanel/src/Widgets/Panel.vala.new	2016-10-22 00:15:13.386112571 +0900
