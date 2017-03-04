@@ -1,31 +1,27 @@
-# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Maintainer: Que Quotion <quequotion@bugmenot.org>
 # Contributor: Maxime Gauduin <alucryd@archlinux.org>
 # Contributor: flamelab <panosfilip@gmail.com>
 
 pkgname=slingshot-launcher-standalone-bzr
-pkgver=r717
+pkgver=r752
 pkgrel=1
-pkgdesc='The Pantheon Application Launcher'
+pkgdesc='The Pantheon Application Launcher (without Gala dependencies)'
 arch=('i686' 'x86_64')
 url='https://launchpad.net/slingshot'
 license=('GPL3')
-groups=('pantheon-unstable')
+groups=('pantheon-qq')
 depends=('gdk-pixbuf2' 'glib2' 'glibc' 'gnome-menus' 'gtk3' 'json-glib'
          'libgee' 'libsoup' 'plank' 'zeitgeist'
          'libgranite.so' 'libswitchboard-2.0.so' 'libwingpanel-2.0.so')
 makedepends=('bzr' 'cmake' 'vala')
-provides=('slingshot-launcher')
-conflicts=('slingshot-launcher')
+provides=(slingshot-launcher{,-bzr})
+conflicts=(slingshot-launcher{,-bzr})
 install='slingshot-launcher.install'
 #source=('slingshot-launcher::bzr+lp:slingshot'
 source=('slingshot-launcher::bzr+lp:slingshot'
         'no-gala.patch')
 sha256sums=('SKIP'
-            '869a6fdbf0cbe9063b83876f20e223e416652469b1e76e7a3d6a0de1dd0d1a8f'
-            '02af4535567ebea5e920de5bf7f20e5d0653478f1eb4cb93992fb8c000db2b13'
-            '37750f02976d73aedccb87f92c2dd2421f3968d2c6b70f5407c4bc1b458aaa01'
-            'a3b6e16dca74409c54a5afb18539d6f7fcb64fcb72c1c7bdd4a2f9275de943dc'
-            '275a5a38c42dc9cf8f012a91dada75776f54b21b52b6470f24def98e647fb67d')
+            '869a6fdbf0cbe9063b83876f20e223e416652469b1e76e7a3d6a0de1dd0d1a8f')
 
 pkgver() {
   cd slingshot-launcher
