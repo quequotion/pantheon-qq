@@ -1,4 +1,5 @@
-# Maintainer: Maxime Gauduin <alucryd@archlinux.org>
+# Maintainer: Que Quotion <quequotion@bugmenot.com>
+# Contributor: Maxime Gauduin <alucryd@archlinux.org>
 
 pkgname=switchboard-plug-elementary-tweaks-bzr
 pkgver=r276
@@ -11,7 +12,7 @@ groups=('pantheon-unstable')
 depends=('gconf' 'glib2' 'glibc' 'gtk3' 'libgee'
          'libgranite.so' 'libswitchboard-2.0.so')
 makedepends=('bzr' 'cmake' 'vala')
-provides=('switchboard-plug-elementary-tweaks')
+provides=(switchboard-plug-elementary-tweaks{,-bzr})
 conflicts=('switchboard-plug-elementary-tweaks')
 source=('switchboard-plug-elementary-tweaks::bzr+lp:elementary-tweaks'
         'opacity.patch')
