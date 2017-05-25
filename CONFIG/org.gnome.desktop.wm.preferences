@@ -1,0 +1,20 @@
+org.gnome.desktop.wm.preferences disable-workarounds false
+org.gnome.desktop.wm.preferences focus-new-windows 'smart'
+org.gnome.desktop.wm.preferences action-right-click-titlebar 'menu'
+org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
+org.gnome.desktop.wm.preferences action-middle-click-titlebar 'minimize'
+org.gnome.desktop.wm.preferences titlebar-uses-system-font false
+org.gnome.desktop.wm.preferences theme 'Adwaita-dark'
+org.gnome.desktop.wm.preferences num-workspaces 4
+org.gnome.desktop.wm.preferences raise-on-click true
+org.gnome.desktop.wm.preferences auto-raise true
+org.gnome.desktop.wm.preferences visual-bell false
+org.gnome.desktop.wm.preferences focus-mode 'click'
+org.gnome.desktop.wm.preferences action-double-click-titlebar 'toggle-maximize'
+org.gnome.desktop.wm.preferences auto-raise-delay 500
+org.gnome.desktop.wm.preferences button-layout 'close:maximize'
+org.gnome.desktop.wm.preferences workspace-names @as []
+org.gnome.desktop.wm.preferences audible-bell false
+org.gnome.desktop.wm.preferences resize-with-right-button true
+org.gnome.desktop.wm.preferences titlebar-font 'Droid Sans Bold 12'
+org.gnome.desktop.wm.preferences visual-bell-type 'fullscreen-flash'

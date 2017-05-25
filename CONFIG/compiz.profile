@@ -211,7 +211,6 @@ s0_bonanza_color = #ff3305ff
 [cube]
 s0_top_color = #ffffff00
 s0_bottom_color = #ffffff00
-s0_skydome_image = /home/zombie/Pictures/wallpaper/skydomes/8994556164_cdf9716a6a_o-retouch.png
 s0_skydome_animated = true
 s0_skydome_gradient_start_color = #00000000
 s0_skydome_gradient_end_color = #00000000
