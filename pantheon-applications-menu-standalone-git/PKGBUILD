@@ -2,9 +2,9 @@
 # Contributor: Maxime Gauduin <alucryd@archlinux.org>
 # Contributor: flamelab <panosfilip@gmail.com>
 
-pkgname=slingshot-launcher-standalone-bzr
+pkgname=pantheon-applications-menu-standalone-git
 pkgver=r752
-pkgrel=1
+pkgrel=2
 pkgdesc='The Pantheon Application Launcher (without Gala dependencies)'
 arch=('i686' 'x86_64')
 url='https://launchpad.net/slingshot'
@@ -14,23 +14,22 @@ depends=('gdk-pixbuf2' 'glib2' 'glibc' 'gnome-menus' 'gtk3' 'json-glib'
          'libgee' 'libsoup' 'plank' 'zeitgeist'
          'libgranite.so' 'libswitchboard-2.0.so' 'libwingpanel-2.0.so')
 makedepends=('bzr' 'cmake' 'vala')
-provides=(slingshot-launcher{,-bzr})
-conflicts=(slingshot-launcher{,-bzr})
+provides=(slingshot-launcher{,{,-standalone}-bzr}, pantheon-applications-menu{,-git})
+conflicts=(slingshot-launcher{,{,-standalone}-bzr}, pantheon-applications-menu{,-git})
 install='slingshot-launcher.install'
-#source=('slingshot-launcher::bzr+lp:slingshot'
-source=('slingshot-launcher::bzr+lp:slingshot'
+source=('pantheon-applications-menu::git+https://github.com/elementary/applications-menu.git'
         'no-gala.patch')
 sha256sums=('SKIP'
-            '869a6fdbf0cbe9063b83876f20e223e416652469b1e76e7a3d6a0de1dd0d1a8f')
+            '8e983f8ba462964f6198ad4cd1954f33df49d8e283db1ce076363b7a97483279')
 
 pkgver() {
-  cd slingshot-launcher
+  cd pantheon-applications-menu
 
   echo "r$(bzr revno)"
 }
 
 prepare() {
-  cd slingshot-launcher
+  cd pantheon-applications-menu
 
   if [[ -d build ]]; then
     rm -rf build
@@ -43,7 +42,7 @@ prepare() {
 }
 
 build() {
-  cd slingshot-launcher/build
+  cd pantheon-applications-menu/build
 
   cmake .. \
     -DCMAKE_BUILD_TYPE='Release' \
@@ -55,7 +54,7 @@ build() {
 }
 
 package() {
-  cd slingshot-launcher/build
+  cd pantheon-applications-menu/build
 
   make DESTDIR="${pkgdir}" install
 }

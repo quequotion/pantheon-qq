@@ -1,5 +1,5 @@
---- src/slingshot-launcher/src/Settings.vala	2016-10-22 01:14:50.852071000 +0900
-+++ src/slingshot-launcher/src/Settings.vala.new	2016-10-22 01:38:34.730649444 +0900
+--- src/pantheon-applications-menu/src/Settings.vala	2016-10-22 01:14:50.852071000 +0900
++++ src/pantheon-applications-menu/src/Settings.vala.new	2016-10-22 01:38:34.730649444 +0900
 @@ -18,14 +18,14 @@
  
  public class Slingshot.Settings : Granite.Services.Settings {
@@ -31,8 +31,8 @@
      }
  
  }
---- src/slingshot-launcher/src/SlingshotView.vala	2016-10-22 01:14:50.852071000 +0900
-+++ src/slingshot-launcher/src/SlingshotView.vala.new	2016-10-22 01:45:08.158106647 +0900
+--- src/pantheon-applications-menu/src/SlingshotView.vala	2016-10-22 01:14:50.852071000 +0900
++++ src/pantheon-applications-menu/src/SlingshotView.vala.new	2016-10-22 01:45:08.158106647 +0900
 @@ -51,7 +51,7 @@
          public Gee.HashMap<string, Gee.ArrayList<Backend.App>> apps;
  
