@@ -11,12 +11,12 @@
      }
  
      private bool animation_step () {
-@@ -83,12 +84,38 @@
+@@ -83,12 +84,42 @@
          return true;
      }
  
 +    private bool animation_unstep () {
-+        if (panel_displacement == -1) {
++        if (panel_displacement >= -1) {
 +            return false;
 +        }
 +
@@ -42,11 +42,15 @@
 +        //Services.BackgroundManager.get_default ().initialize (this.monitor_number, panel_height);
 +
 +        Timeout.add (250 / panel_height, animation_unstep);
++
 +        return true;
 +    }
++
 +    private bool reactivate () {
 +        update_panel_dimensions ();
++
 +        Timeout.add (250 / panel_height, animation_step);
++
 +        return true;
      }
  
