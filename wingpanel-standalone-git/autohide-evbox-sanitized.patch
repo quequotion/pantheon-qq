@@ -1,0 +1,82 @@
+--- src/wingpanel/src/PanelWindow.vala	2017-05-30 03:59:59.880207491 +0900
++++ src/wingpanel/src/PanelWindow.vala	2017-05-30 04:08:01.138023322 +0900
+@@ -22,6 +22,8 @@
+ 
+     private Widgets.Panel panel;
+ 
++    private Gtk.EventBox box;
++
+     private int monitor_number;
+ 
+     private int monitor_width;
+@@ -62,10 +62,17 @@
+ 
+         popover_manager = new Services.PopoverManager (this);
+ 
++        box = new Gtk.EventBox();
++        box.add_events (Gdk.EventMask.ENTER_NOTIFY_MASK | Gdk.EventMask.LEAVE_NOTIFY_MASK);
++
+         panel = new Widgets.Panel (popover_manager);
+         panel.realize.connect (on_realize);
+ 
+-        this.add (panel);
++        box.add(panel);
++        box.enter_notify_event.connect (reactivate);
++        box.leave_notify_event.connect (on_idle);
++
++        this.add (box);
+     }
+ 
+     private bool animation_step () {
+@@ -80,12 +83,42 @@
+         return true;
+     }
+ 
++    private bool animation_unstep () {
++        if (panel_displacement >= -1) {
++            return false;
++        }
++
++        panel_displacement++;
++
++        update_panel_dimensions ();
++
++        return true;
++    }
++
+     private void on_realize () {
+         update_panel_dimensions ();
+ 
+         Services.BackgroundManager.get_default ().initialize (this.monitor_number, panel_height);
+ 
+         Timeout.add (300 / panel_height, animation_step);
++    }
++
++    private bool on_idle () {
++        update_panel_dimensions ();
++
++        Services.BackgroundManager.get_default ().initialize (this.monitor_number, panel_height);
++
++        Timeout.add (300 / panel_height, animation_unstep);
++
++        return true;
++    }
++
++    private bool reactivate () {
++        update_panel_dimensions ();
++
++        Timeout.add (300 / panel_height, animation_step);
++
++        return true;
+     }
+ 
+     private void update_panel_dimensions () {
+@@ -144,8 +144,6 @@
+         monitor_y = monitor_dimensions.y;
+ 
+         this.move (monitor_x, monitor_y - (panel_height + panel_displacement));
+-
+-        update_struts ();
+     }
+ 
+     private void update_visual () {
