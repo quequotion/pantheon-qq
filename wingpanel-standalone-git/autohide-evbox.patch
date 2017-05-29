@@ -1,4 +1,4 @@
---- src/wingpanel/src/PanelWindow.vala~	2017-05-30 03:59:59.880207491 +0900
+--- src/wingpanel/src/PanelWindow.vala	2017-05-30 03:59:59.880207491 +0900
 +++ src/wingpanel/src/PanelWindow.vala	2017-05-30 04:08:01.138023322 +0900
 @@ -22,6 +22,8 @@
  
@@ -9,8 +9,6 @@
      private int monitor_number;
  
      private int monitor_width;
---- src/wingpanel/src/PanelWindow.vala.orig	2017-05-30 03:25:18.252462844 +0900
-+++ src/wingpanel/src/PanelWindow.vala	2017-05-30 03:56:08.982104317 +0900
 @@ -62,10 +62,17 @@
  
          popover_manager = new Services.PopoverManager (this);
@@ -30,7 +28,7 @@
      }
  
      private bool animation_step () {
-@@ -80,12 +83,42 @@
+@@ -80,12 +83,43 @@
          return true;
      }
  
@@ -52,7 +50,8 @@
          //Services.BackgroundManager.get_default ().initialize (this.monitor_number, panel_height);
  
 -        Timeout.add (300 / panel_height, animation_step);
-+        Timeout.add (250 / panel_height, animation_step);
++        Timeout.add (100 / panel_height, animation_step);
++        Timeout.add (100 / panel_height, animation_unstep);
 +    }
 +
 +    private bool on_idle () {
@@ -60,7 +59,7 @@
 +
 +        //Services.BackgroundManager.get_default ().initialize (this.monitor_number, panel_height);
 +
-+        Timeout.add (250 / panel_height, animation_unstep);
++        Timeout.add (100 / panel_height, animation_unstep);
 +
 +        return true;
 +    }
@@ -68,9 +67,18 @@
 +    private bool reactivate () {
 +        update_panel_dimensions ();
 +
-+        Timeout.add (250 / panel_height, animation_step);
++        Timeout.add (100 / panel_height, animation_step);
 +
 +        return true;
      }
  
      private void update_panel_dimensions () {
+@@ -144,8 +144,6 @@
+         monitor_y = monitor_dimensions.y;
+ 
+         this.move (monitor_x, monitor_y - (panel_height + panel_displacement));
+-
+-        update_struts ();
+     }
+ 
+     private void update_visual () {
