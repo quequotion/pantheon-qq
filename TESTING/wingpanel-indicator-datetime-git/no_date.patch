@@ -1,6 +1,6 @@
 --- src/wingpanel-indicator-datetime/src/Indicator.vala~	2017-06-04 22:07:15.331728874 +0900
 +++ src/wingpanel-indicator-datetime/src/Indicator.vala	2017-06-04 22:07:56.093393038 +0900
-@@ -22,9 +22,6 @@
+@@ -22,9 +22,6 @@ public class DateTime.Indicator : Wingpanel.Indicator {
  
      private Gtk.Grid main_grid;
  
@@ -10,7 +10,7 @@
      private Widgets.Calendar calendar;
  
      private Wingpanel.Widgets.Button settings_button;
-@@ -50,21 +47,6 @@
+@@ -50,25 +47,11 @@ public class DateTime.Indicator : Wingpanel.Indicator {
              int position = 0;
              main_grid = new Gtk.Grid ();
  
@@ -32,9 +32,12 @@
              calendar = new Widgets.Calendar ();
              calendar.day_double_click.connect (() => {
                  this.close ();
---- src/wingpanel-indicator-datetime/src/Indicator.vala~	2017-06-04 22:16:18.175322994 +0900
-+++ src/wingpanel-indicator-datetime/src/Indicator.vala	2017-06-04 22:18:00.710744311 +0900
-@@ -98,28 +98,19 @@
+             });
++            calendar.margin_top = 6;
+             calendar.margin_bottom = 6;
+             calendar.selection_changed.connect ((date) => {
+                 Idle.add (update_events);
+@@ -116,28 +99,19 @@ public class DateTime.Indicator : Wingpanel.Indicator {
      }
  
      public override void opened () {

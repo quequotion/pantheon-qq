@@ -17,7 +17,7 @@ conflicts=('wingpanel-indicator-datetime')
 source=('git+https://github.com/elementary/wingpanel-indicator-datetime.git'
         'no_date.patch')
 sha256sums=('SKIP'
-            '9219552fbed7295ce88e748e8fffed7ff9f8e3d6e0623d165ff7369b0c43c89c')
+            '8a381c5785a529590313cc0bc03502e0c23665ca2e23670bbf1af5544fc94118')
 
 pkgver() {
   cd wingpanel-indicator-datetime
