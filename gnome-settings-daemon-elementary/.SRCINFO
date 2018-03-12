@@ -20,7 +20,7 @@ pkgbase = gnome-settings-daemon-elementary
 	depends = geoclue2
 	depends = geocode-glib
 	depends = gnome-desktop
-	depends = gsettings-desktop-schemas-ubuntu
+	depends = gsettings-desktop-schemas-ubuntu>=3.24.0
 	depends = gtk3-print-backends
 	depends = libcanberra-pulse
 	depends = libgudev

@@ -13,19 +13,21 @@
 pkgname=gnome-settings-daemon-elementary
 _use_ppa=true
 _ppa_rel=0ubuntu0~bionic1
-#_ppa_ver=3.27.91
+_ppa_ver=3.27.91
 _ubuntu_rel=0ubuntu0.1
 _ubuntu_ver=3.24.2
-#_commit=2ff67385f2b7c7adb0ab438cb41d114235a8e40a # tags/GNOME_SETTINGS_DAEMON_3_24_2^0
-_commit=08c416c68f7becc75ea43723fc956436d4976e79 # tags/GNOME_SETTINGS_DAEMON_3_27_91^0
-#pkgver=3.24.2
+if [[ "${_use_ppa}" == "true" ]]; then
+    _commit=08c416c68f7becc75ea43723fc956436d4976e79 # tags/GNOME_SETTINGS_DAEMON_3_27_91^0
+else
+    _commit=2ff67385f2b7c7adb0ab438cb41d114235a8e40a # tags/GNOME_SETTINGS_DAEMON_3_24_2^0
+fi
 pkgver=3.27.91
 pkgrel=0
 pkgdesc="GNOME Settings Daemon (with elementary OS patch)"
 url="https://gitlab.gnome.org/GNOME/gnome-settings-daemon"
 arch=(i686 x86_64)
 license=(GPL)
-depends=(dconf geoclue2 geocode-glib gnome-desktop gsettings-desktop-schemas-ubuntu
+depends=(dconf geoclue2 geocode-glib gnome-desktop 'gsettings-desktop-schemas-ubuntu>=3.24.0'
 	gtk3-print-backends libcanberra-pulse libgudev libgweather libnotify librsvg 
 	libsystemd libwacom nss pulseaudio pulseaudio-alsa upower)
 makedepends=(docbook-xsl git gnome-common intltool libxslt python xf86-input-wacom)
@@ -77,38 +79,43 @@ prepare() {
 build() {
     cd "${pkgname%-*}"
 
-    #./configure \
-    #    --prefix=/usr \
-    #    --sysconfdir=/etc \
-    #    --localstatedir=/var \
-    #    --libexecdir=/usr/lib/gnome-settings-daemon \
-    #    --disable-static
+    if [[ "${_use_ppa}" == "true" ]]; then
+        meson \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --localstatedir=/var \
+            --libexecdir=/usr/lib/gnome-settings-daemon \
+            -Dstatic-false=true \
+            builddir
 
-    ## https://bugzilla.gnome.org/show_bug.cgi?id=656231
-    #sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-
-    #make
-
-    meson \
-        --prefix=/usr \
-        --sysconfdir=/etc \
-        --localstatedir=/var \
-        --libexecdir=/usr/lib/gnome-settings-daemon \
-        -Dstatic-false=true \
-        builddir
+        ninja -C builddir
 
     #"-Dstatic-false=true"
     #According to the GNOME initiative the format should be -Dstatic-false
     #meson says it needs to be followed by =bool
     #Rediculous, utterly rediculous and probably wrong.
+    else
+        ./configure \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --localstatedir=/var \
+            --libexecdir=/usr/lib/gnome-settings-daemon \
+            --disable-static
 
-    ninja -C builddir
+        # https://bugzilla.gnome.org/show_bug.cgi?id=656231
+        sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
+        make
+    fi
 }
 
 package() {
     cd "${pkgname%-*}"
-    #make DESTDIR="${pkgdir}" install
-    DESTDIR="${pkgdir}" ninja -C builddir install
+    if [[ "${_use_ppa}" == "true" ]]; then
+        DESTDIR="${pkgdir}" ninja -C builddir install
+    else
+        make DESTDIR="${pkgdir}" install
+    fi
 
     # Elementary is shipping these with pantheon-session-git; not sure how good an idea that is (upstream gsd could change before they can react)
     #cd "${pkgdir}"
