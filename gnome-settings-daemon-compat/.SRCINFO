@@ -1,7 +1,7 @@
 pkgbase = gnome-settings-daemon-compat
 	pkgdesc = Compatibility package that provides the background, media keys and mount helpers from GNOME Settings Daemon 3.6
 	pkgver = 3.6.4
-	pkgrel = 11
+	pkgrel = 12
 	url = http://www.gnome.org
 	arch = i686
 	arch = x86_64
@@ -11,7 +11,10 @@ pkgbase = gnome-settings-daemon-compat
 	makedepends = xf86-input-wacom
 	makedepends = ibus
 	makedepends = dconf>=0.28.0-1
-	depends = gnome-settings-daemon
+	makedepends = upower
+	makedepends = libwacom
+	depends = gnome-desktop
+	depends = pulseaudio
 	source = http://ftp.gnome.org/pub/gnome/sources/gnome-settings-daemon/3.6/gnome-settings-daemon-3.6.4.tar.xz
 	source = standalone-background-helper.patch
 	source = standalone-media-keys-helper.patch
