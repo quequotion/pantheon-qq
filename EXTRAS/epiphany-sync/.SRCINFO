@@ -1,0 +1,15 @@
+pkgbase = epiphany-sync
+	pkgdesc = Load whole profile in memory (synced to tmpfs)
+	pkgver = 1
+	pkgrel = 1
+	arch = any
+	license = GPL
+	depends = bash
+	depends = systemd
+	source = epiphany-sync
+	source = epiphany-sync.service
+	sha1sums = 2a8fda153bf3fb2d9a14b632082329ed6e2d8fab
+	sha1sums = 2c1c89aee5e1ea2ca47d518690b93238213e73fd
+
+pkgname = epiphany-sync
+
