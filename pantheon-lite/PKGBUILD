@@ -12,7 +12,8 @@ license=('GPL3')
 groups=('pantheon-qq')
 depends=('openbox' 'picom' 'pantheon-workarounds'
          'wingpanel-standalone-git')
-optdepends=("obconf: openbox configuration utility"
+optdepends=("archlinux-xdg-menu; Generate an applications menu for Openbox"
+            "obconf: openbox configuration utility"
             "elementary-os-openbox: Elementary theme for Openbox"
             "hsetroot: Set X11 background"
             "xorg-xwininfo: set mousewheel transparency scrolling like compiz with picom-trans"
