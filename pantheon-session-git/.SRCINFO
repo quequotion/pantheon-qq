@@ -1,0 +1,28 @@
+pkgbase = pantheon-session-git
+	pkgdesc = Session settings for Pantheon
+	pkgver = r145.d73813f
+	pkgrel = 1
+	url = https://github.com/elementary/session-settings
+	arch = any
+	groups = pantheon-unstable
+	license = GPL3
+	makedepends = git
+	makedepends = meson
+	depends = dconf
+	depends = gnome-keyring
+	depends = gnome-session
+	depends = gnome-settings-daemon
+	depends = libgala.so=0-64
+	depends = libwingpanel-2.0.so=0-64
+	depends = onboard
+	depends = orca
+	depends = pantheon-applications-menu
+	depends = pantheon-dpms-helper
+	depends = plank
+	depends = xdg-user-dirs-gtk
+	optdepends = pantheon-default-settings
+	source = pantheon-session::git+https://github.com/elementary/session-settings.git
+	sha256sums = SKIP
+
+pkgname = pantheon-session-git
+
