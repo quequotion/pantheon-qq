@@ -1,0 +1,12 @@
+[Unit]
+Description=Reduce power usage system-wide
+
+[Service]
+Type=idle
+RemainAfterExit=yes
+ExecStart=/usr/bin/throttlectl cut
+StandardOutput=null
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
