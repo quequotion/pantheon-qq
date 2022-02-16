@@ -1,26 +1,24 @@
 pkgbase = wingpanel-indicator-sensors-git
 	pkgdesc = Sensors indicator for Wingpanel
-	pkgver = r5.0c29892
+	pkgver = r31.3b9e5bc
 	pkgrel = 1
 	url = https://github.com/Dirli/wingpanel-indicator-sensors
 	arch = x86_64
 	groups = pantheon-unstable
 	license = GPL2
 	makedepends = git
-	makedepends = granite
 	makedepends = meson
 	makedepends = vala
-	makedepends = libwingpanel-2.0.so
+	makedepends = wingpanel
 	depends = glib2
 	depends = glibc
 	depends = gtk3
-	depends = granite
-	depends = libgee
+	depends = libgranite.so
 	depends = libwingpanel-2.0.so
+	depends = libgee
 	provides = wingpanel-indicator-sensors
 	conflicts = wingpanel-indicator-sensors
 	source = git+https://github.com/Dirli/wingpanel-indicator-sensors.git
 	sha256sums = SKIP
 
 pkgname = wingpanel-indicator-sensors-git
-
