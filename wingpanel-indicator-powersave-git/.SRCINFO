@@ -1,8 +1,8 @@
-pkgbase = wingpanel-indicator-cpufreq-git
-	pkgdesc = CPU frequency indicator for Wingpanel
-	pkgver = r24.7dde286
+pkgbase = wingpanel-indicator-powersave-git
+	pkgdesc = User-discretion power management utility for Wingpanel
+	pkgver = r28.b0efb00
 	pkgrel = 1
-	url = https://github.com/Dirli/wingpanel-indicator-cpufreq
+	url = https://github.com/quequotion/wingpanel-indicator-powersave
 	arch = x86_64
 	groups = pantheon-unstable
 	license = GPL2
@@ -17,9 +17,10 @@ pkgbase = wingpanel-indicator-cpufreq-git
 	depends = libgranite.so
 	depends = libwingpanel.so
 	depends = polkit
-	provides = wingpanel-indicator-cpufreq
-	conflicts = wingpanel-indicator-cpufreq
-	source = git+https://github.com/Dirli/wingpanel-indicator-cpufreq.git
+	depends = throttlectl
+	provides = wingpanel-indicator-powersave
+	conflicts = wingpanel-indicator-powersave
+	source = git+https://github.com/quequotion/wingpanel-indicator-powersave.git
 	sha256sums = SKIP
 
-pkgname = wingpanel-indicator-cpufreq-git
+pkgname = wingpanel-indicator-powersave-git
