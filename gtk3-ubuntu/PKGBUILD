@@ -5,8 +5,7 @@
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 # Maintainer: Solomon Choina <shlomochoina@gmail.com>
-pkgbase=gtk3-ubuntu
-pkgname=(gtk3-ubuntu gtk3-docs gtk3-demos)
+pkgname=gtk3-ubuntu
 _ubuntu_ver=3.24.23
 _ubuntu_rel=1ubuntu1
 _import_pkgver=3.24.31
@@ -126,16 +125,4 @@ END
   _pick demo usr/share/glib-2.0/schemas/org.gtk.Demo.gschema.xml
   _pick demo usr/share/icons/hicolor/*/apps/gtk3-{demo,widget-factory}[-.]*
   _pick demo usr/share/man/man1/gtk3-{demo,demo-application,icon-browser,widget-factory}.1
-}
-
-package_gtk3-docs() {
-  pkgdesc+=" (documentation)"
-  depends=()
-  mv docs/* "$pkgdir"
-}
-
-package_gtk3-demos() {
-  pkgdesc+=" (demo applications)"
-  depends=(gtk3)
-  mv demo/* "$pkgdir"
 }

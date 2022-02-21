@@ -62,11 +62,3 @@ pkgname = gtk3-ubuntu
 	conflicts = gtk3
 	conflicts = gtk3-print-backends
 	replaces = gtk3-print-backends<=3.22.26-1
-
-pkgname = gtk3-docs
-	pkgdesc = GObject-based multi-platform toolkit (documentation)
-	depends = 
-
-pkgname = gtk3-demos
-	pkgdesc = GObject-based multi-platform toolkit (demo applications)
-	depends = gtk3
