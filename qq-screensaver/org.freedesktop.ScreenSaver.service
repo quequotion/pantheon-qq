@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.freedesktop.ScreenSaver
-Exec=/usr/local/sbin/dbus-screenlock-freedesktop.py

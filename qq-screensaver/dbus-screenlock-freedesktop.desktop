@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=DBus Screenlock (freedesktop)
-Comment=Intercept freedesktop screenlocker dbus  service calls
-Exec=dbus-screenlock-freedesktop.py
-NotShownIn=Gnome;Unity
